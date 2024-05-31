@@ -1,0 +1,41 @@
+@import "../../styles/base/mixins";
+
+.btn{
+    width: 100%;
+}
+.content__form{
+    overflow: hidden;
+}
+.form{
+    @include Flex($direction:column, $justify:space-between);
+    height: 100%;
+    overflow: auto;
+    &__together{
+        @include Flex($direction:column);
+    }
+    &__header{
+        top: 0;
+    }
+    &__body{
+        overflow: auto;
+        height: 100%
+    }
+    &__header,&__footer{
+        width: 100%;
+    }
+    &__footer{
+        padding: 1rem 0;
+    }
+}
+
+@include Desktop{
+    .form{
+        &__together{
+            @include Flex();
+            gap: 3rem;
+        }
+        &__body{
+            overflow: hidden;
+        }
+    }
+}

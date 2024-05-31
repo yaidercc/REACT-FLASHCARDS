@@ -1,0 +1,95 @@
+@import "base/colors";
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; /** Resete para REMS - 65.5%=10px de 16px que eran antes. ahora 1rem= 10px, 2rem =20px 2.2rem=22px 
+    ahora los rem son multiplos de 10**/
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.6rem;
+  text-transform: capitalize;
+}
+
+label{
+  display: inline-block;
+  margin-bottom: .5rem;
+}
+
+ul {
+  padding: 0;
+}
+
+input {
+  height: 4rem;
+  font-family: inherit;
+  text-transform: capitalize;
+}
+
+button{
+  border-radius: 1rem;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
+input,
+textarea {
+  width: 100%;
+}
+
+textarea {
+  resize: none;
+}
+
+input:not(input[type="submit"]) {
+  padding: 0 2rem;
+  font-size: 1.3rem;
+}
+
+[name*="trash"] {
+  color: red;
+}
+
+img {
+  max-width: 100%;
+}
+a {
+  text-decoration: none;
+  color: $blackColor;
+}
+ul{
+  list-style: none;
+}
+.contenedor {
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+/* Sistema de tamaños*/
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 3.8rem;
+}
+h2 {
+  font-size: 3.4rem;
+}
+h3 {
+  font-size: 3rem;
+}
+h4 {
+  font-size: 2.6rem;
+}

@@ -1,0 +1,51 @@
+@mixin Desktop {
+    @media (min-width: 991px) {
+        @content;
+    }
+}
+
+@mixin Tablet {
+    @media (min-width: 768px) and (max-width: 991px) {
+        @content;
+    }
+}
+
+@mixin MobileMiddle {
+    @media (min-width: 425px) and (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin Mobile {
+    @media (min-width: 320px) and (max-width: 425px) {
+        @content;
+    }
+}
+
+@mixin Flex($justify:center,$align:center,$direction:row){
+    display: flex;
+    align-items: $align;
+    justify-content: $justify;
+    flex-direction: $direction;
+}
+
+@mixin btn-primary($backgroundColor,$color){
+    background-color: $backgroundColor;
+    color: $color;
+    &:hover{
+        background-color: rgba($color: $backgroundColor, $alpha: 0.5);
+    }
+}
+
+
+@mixin btn-secondary($backgroundColor){
+    background-color: transparent;
+    color: $backgroundColor;
+    font-weight: bold;
+    border: 2px solid $backgroundColor;
+    &:hover{
+        background-color: $backgroundColor;
+        color:#fff;
+    }
+}
+
