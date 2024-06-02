@@ -1,17 +1,33 @@
+import Alert from "@mui/material/Alert";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import axios from "../../helpers/fetchApi";
+import { useAuth } from "../../hooks/useAuth";
 import { useForm } from "../../hooks/useForm";
 import "./Auth.scss";
-import Alert from "@mui/material/Alert";
-import { NavLink } from "react-router-dom";
 
 export const Login = () => {
   const { username, password, onInputChange } = useForm({
     username: "",
     password: "",
   });
+  const {isAuthenticated,validateAuthentication} = useAuth()
   const [error, setError] = useState(null);
 
+  // useEffect(()=>{
+  //   const response = validateAuthentication()
+  //   if(!isAuthenticated){
+  //     console.log("ey que fue")
+  //   }
+  // },[])
+
+  const validateSession = async() =>{
+     const response2 = await axios.get("/auth/isAuthenticated",{
+        withCredentials: true
+      });
+      console.log(response2)
+      
+  }
   const submitForm = async (e) => {
     e.preventDefault();
     try {
@@ -21,10 +37,12 @@ export const Login = () => {
       const response = await axios.post("/auth/login", {
         username,
         password,
+        withCredentials: true
       });
+     
     } catch (error) {
-      const errorMsg = error.response.data?.msg || error.response.data.errors?.msg;
-      setError(errorMsg);
+      // const errorMsg = error.response.data?.msg || error.response.data.errors?.msg;
+      // setError(errorMsg);
     }
   };
 
@@ -65,6 +83,7 @@ export const Login = () => {
             </p>
           </div>
         </form>
+        <button onClick={validateSession}>validar sesion</button>
       </div>
       {error && (
         <Alert variant="filled" severity="success">

@@ -1,4 +1,6 @@
-$logoFont:'Lobster',
-cursive;
-$principalFont:'Poppins',
-sans-serif;
+@font-face {
+    font-family: "Lobster";
+    src:url("./fonts/Lobster-Regular.ttf");
+    font-weight: bolder;
+    font-style: normal;
+  }

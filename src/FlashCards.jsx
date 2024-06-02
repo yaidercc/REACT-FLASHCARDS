@@ -1,5 +1,6 @@
-import { Login,SignUp,Home } from "./components"
-import { RouterProvider,createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Home, Login, SignUp } from "./components";
+import { useAuth } from "./hooks/useAuth";
 
 const router = createBrowserRouter([
   {
@@ -18,9 +19,10 @@ const router = createBrowserRouter([
 ])
 
 const FlashCards = () => {
+  useAuth()
   return (
     <>
-      <RouterProvider router={router}/>;
+      <RouterProvider router={router}/>
     </>
   )
 }

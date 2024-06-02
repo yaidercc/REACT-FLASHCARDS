@@ -31,7 +31,9 @@ input {
 }
 
 button{
-  border-radius: 1rem;
+  cursor: pointer;
+  border: none;
+  background: transparent;
 }
 
 input:focus,
@@ -67,9 +69,13 @@ a {
 ul{
   list-style: none;
 }
-.contenedor {
+.container {
   max-width: 120rem;
+  width: 90%;
   margin: 0 auto;
+}
+.section{
+  margin-top: 6rem;
 }
 
 /* Sistema de tamaños*/

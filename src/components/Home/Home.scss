@@ -1,0 +1,160 @@
+@import "../../styles/base/mixins";
+@import "../../styles/base/vars";
+@import "../../styles/base/colors";
+
+.menu {
+  @include Flex($justify: space-between);
+  padding: 2rem 0;
+
+  .profile {
+    position: relative;
+    padding: 0 2rem;
+
+    &__options {
+      background-color: #f9f8f8;
+      position: absolute;
+      z-index: 100;
+      width: 100%;
+      padding: 1.5rem 0;
+      text-align: center;
+      left: 0;
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+      border-radius: $radius;
+
+      li {
+        padding: 0.5rem 0;
+        transition: background 0.3s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #dbdbdb;
+        }
+      }
+    }
+  }
+}
+
+.container_list-topics {
+  width: 100%;
+}
+
+@include responsive(768px) {
+  .container_list-topics {
+    width: auto;
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.submenu_topics {
+  width: 100%;
+  position: absolute;
+  z-index: 10;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  background-color: #fff;
+}
+
+.btn_open-topics:hover {
+  .submenu_topics {
+    display: block;
+  }
+}
+
+.btn_open-topics:hover {
+  .submenu_topics {
+    display: block;
+  }
+}
+
+.btn_topics {
+  width: 100%;
+  outline: 1px solid $blackColor;
+  padding: 1.2rem 2rem;
+  padding-bottom: 1rem;
+  @include Flex($justify: space-between);
+
+  span {
+    margin-right: 1rem;
+  }
+
+  &:hover {
+    box-shadow: 3px 3px 5px rgba($color: $blackColor, $alpha: 0.3);
+    transition: 0.2s box-shadow ease-in-out;
+  }
+}
+.arrowIcon {
+  transition: transform 0.3s ease-in-out;
+  &.rotate__arrow {
+    transform: rotate(180deg);
+  }
+}
+
+.btn__addTopic {
+  @include Flex();
+}
+
+.container_flashcards {
+  height: 50rem;
+  padding: 1rem;
+  border: 1px solid rgba($color: $blackColor, $alpha: 0.1);
+  box-shadow: 3px 3px 5px rgba($color: $blackColor, $alpha: 0.1);
+  display: grid;
+  grid-template-columns: repeat(1fr);
+  grid-gap: 2rem;
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .container_flashcards {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1rem;
+  }
+}
+
+.definition_flashcard {
+  overflow: hidden;
+  @include Flex($direction: column );
+
+  img {
+    max-height: 50%;
+    margin: 2rem 0;
+  }
+
+  .definition a:hover {
+    color: $principalColorHover;
+    transition: 0.4s all ease-in-out;
+  }
+}
+
+.definition {
+  a {
+    color: $principalColor;
+    font-weight: 600;
+  }
+
+  p {
+    line-height: 2;
+  }
+
+  p,
+  h3 {
+    margin-bottom: 3rem;
+  }
+
+  h3 {
+    font-size: calc(1em + 1vw);
+  }
+}
+
+@media (min-width: 768px) {
+  .definition_flashcard {
+    display: flex;
+    flex-direction: row;
+
+    img {
+      height: 40rem;
+    }
+  }
+}
