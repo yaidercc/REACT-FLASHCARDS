@@ -9,7 +9,9 @@
   .profile {
     position: relative;
     padding: 0 2rem;
-
+    .btn__profile {
+      @include Flex();
+    }
     &__options {
       background-color: #f9f8f8;
       position: absolute;
@@ -106,6 +108,13 @@
   overflow-y: auto;
 }
 
+.flashcards_settings {
+  button {
+    padding: 1rem;
+    color: #fff;
+  }
+}
+
 @media (min-width: 768px) {
   .container_flashcards {
     grid-template-columns: repeat(2, 1fr);
@@ -115,7 +124,7 @@
 
 .definition_flashcard {
   overflow: hidden;
-  @include Flex($direction: column );
+  @include Flex($direction: column);
 
   img {
     max-height: 50%;
