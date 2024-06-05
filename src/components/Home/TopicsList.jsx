@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Icono from "../../plugins/icon.jsx";
+import { useTopics } from "../../hooks/useTopics.js";
 export const TopicsList = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { topics, getTopics } = useTopics();
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    getTopics();
+  }, []);
 
   return (
     <section className="topic section container">
@@ -21,13 +27,26 @@ export const TopicsList = () => {
             <li>
               <div className="input_search" data-search="temarios">
                 <input type="search" name="search" placeholder="Buscar temarios" />
-                <Icono name="search"/>
+                <Icono name="search" />
               </div>
             </li>
-            <li className="topics_container scroll"></li>
+            <li className="topics__container scroll">
+              <ul className="topics__list" >
+                {topics.map((topic) => {
+                  return (
+                    <li className="topic__item" key={topic.name}>
+                      <span>{topic.name}</span>
+                      <a href="#" className="delete_topic">
+                        j
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </li>
             <div className="container_new-topic">
               <button className="btn__addTopic">
-                  <Icono name="add" />
+                <Icono name="add" />
                 <span>Nuevo</span>
               </button>
             </div>

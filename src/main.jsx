@@ -1,13 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import FlashCards from './FlashCards.jsx'
-import './styles/index.scss'
-import './styles/global.scss'
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import FlashCards from "./FlashCards.jsx";
+import "./styles/global.scss";
+import "./styles/index.scss";
 
-
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-       <FlashCards />
-  </React.StrictMode>
-)
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <BrowserRouter>
+    <FlashCards />
+  </BrowserRouter>
+);
