@@ -39,6 +39,11 @@
 .container_list-topics {
   width: 100%;
 }
+.topics {
+  &__settings {
+    @include Flex();
+  }
+}
 
 @include responsive(768px) {
   .container_list-topics {

@@ -14,6 +14,8 @@ export const Menu = () => {
   const handleMenu = () => {
     setOpenMenu(!openMenu);
   };
+
+
   return (
     <div className="menu container">
       <h1>Flashcards</h1>

@@ -36,13 +36,14 @@ export const useAuth = () => {
 
   const Logout = async () => {
     try {
-      await axios.get("/auth/logut", {
+      await axios.post("/auth/logut", {
         withCredentials: true,
       });
-
       setUser({});
       setIsAuthenticated(false);
-      Cookies.remove('userData');
+      console.log(Cookies)
+      Cookies.remove('connect.sid');
+
     } catch (error) {
       const errorInfo = error.response?.msg;
       alert(errorInfo);
