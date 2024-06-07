@@ -8,7 +8,6 @@ import { Modal } from "../../utils/Modal/Modal"
 export const Home = () => {
   return (
     <>
-      
       <Menu/>
       <TopicsList/>
       <FlashCardsContainer/>

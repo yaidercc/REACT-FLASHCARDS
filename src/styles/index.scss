@@ -494,6 +494,7 @@ body{
 /* **** modal **** */
 .overlay {
     @extend %overlay;
+    transition: visibility .4s ease-in-out;
     .modal {
         background-color: #fff;
         max-width: 95%;

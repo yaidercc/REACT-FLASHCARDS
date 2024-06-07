@@ -3,15 +3,15 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import { useFlashCards } from "../../hooks/useFlashCards";
 
-export const FormFlashcard = ({id="", question="", answer="" }) => {
-  const { formState, onInputChange } = useForm({ answer, question });
-  const {editFlashcard} = useFlashCards()
+export const FormFlashcard = ({ id = "", question = "", answer = "" }) => {
+  const { formState, onInputChange, resetForm } = useForm({ answer, question });
+  const { editFlashcard, createFlashCards } = useFlashCards();
   const { question: questionText, answer: answerText } = formState;
 
-  const onSubmit = async(event) =>{
+  const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      if(!answerText.trim() || !questionText.trim()){
+      if (!answerText.trim() || !questionText.trim()) {
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -19,20 +19,27 @@ export const FormFlashcard = ({id="", question="", answer="" }) => {
         });
         return;
       }
-  
-      if(id){
-        await editFlashcard(id,questionText,answerText);
+
+      if (id) {
+        await editFlashcard(id, questionText, answerText);
         Swal.fire({
           position: "bottom-end",
           icon: "success",
           title: "Flashcard editada con exito",
           showConfirmButton: false,
-          timer: 2500
+          timer: 2500,
         });
-      }else{
-        editFlashcard(answerText,questionText)
+      } else {
+        await createFlashCards(answerText, questionText);
+        resetForm();
+        Swal.fire({
+          position: "bottom-end",
+          icon: "success",
+          title: "Flashcard creada con exito",
+          showConfirmButton: false,
+          timer: 2500,
+        });
       }
-  
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -40,7 +47,7 @@ export const FormFlashcard = ({id="", question="", answer="" }) => {
         text: "Hubo un error al realizar esta accion, intentalo mas tarde",
       });
     }
-  }
+  };
   return (
     <form className="form" onSubmit={onSubmit}>
       <div className="input input_modal">

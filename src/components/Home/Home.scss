@@ -116,28 +116,44 @@
 .btn__addTopic {
   @include Flex();
 }
-
-.container_flashcards {
-  height: 50rem;
-  padding: 1rem;
-  border: 1px solid rgba($color: $blackColor, $alpha: 0.1);
-  box-shadow: 3px 3px 5px rgba($color: $blackColor, $alpha: 0.1);
-  display: grid;
-  grid-template-columns: repeat(1fr);
-  grid-gap: 2rem;
-  overflow-y: auto;
+.container__flashcards {
   background-color: #fff;
-}
-
-.flashcards_settings {
-  button {
+  box-shadow: 3px 3px 5px rgba($color: $blackColor, $alpha: 0.1);
+  .content__flashcards {
+    height: 50rem;
     padding: 1rem;
-    color: #fff;
+    border: 1px solid rgba($color: $blackColor, $alpha: 0.1);
+    display: grid;
+    grid-template-columns: repeat(1fr);
+    grid-gap: 2rem;
+    overflow-y: auto;
+  }
+  .flashcards_settings {
+    button {
+      padding: 1rem;
+      color: #fff;
+    }
+  }
+  .flashcards__header {
+    @include Flex();
+    padding: 1.5rem;
+  }
+  @include Desktop {
+    .flashcards__header {
+      @include Flex($justify: space-between);
+      input {
+        width: 30%;
+      }
+      .btn_submit{
+        width: 30%;
+      }
+      padding: 1.5rem;
+    }
   }
 }
 
 @media (min-width: 768px) {
-  .container_flashcards {
+  .content__flashcards {
     grid-template-columns: repeat(2, 1fr);
     padding: 1rem;
   }

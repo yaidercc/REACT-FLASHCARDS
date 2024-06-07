@@ -4,12 +4,38 @@ import axios from "../helpers/fetchApi";
 import { useAuth } from "./useAuth";
 export const useFlashCards = () => {
   const { flashcards, setFlashcards, currentTopic } = useContext(TopicsAndFlashcards);
-  const [isLoading, setIsLoading] = useState(true);
+  const [ isLoading, setIsLoading ] = useState(true);
   const { Logout } = useAuth();
 
   useEffect(() => {
     getFlashCards();
   }, [currentTopic]);
+
+  const createFlashCards = async(question,answer) =>{
+    try {
+      setIsLoading(true);
+      if (currentTopic) {
+        const response = await axios.post(`/flashcard/createFlashcard/${currentTopic}`,{
+          question,
+          answer
+        }, {
+          withCredentials: true,
+        });
+        const { flashcard } = response.data;
+        setIsLoading(false);
+        console.log(flashcard)
+        setFlashcards([...flashcards,flashcard]);
+        return;
+      }
+      setIsLoading(false);
+      setFlashcards([]);
+    } catch (error) {
+      const errorInfo = error?.response;
+      if (errorInfo?.status === 401) {
+        await Logout();
+      }
+    }
+  }
 
   const getFlashCards = async () => {
     try {
@@ -74,5 +100,5 @@ export const useFlashCards = () => {
         }
       }
   }
-  return { getFlashCards, deleteFlashcard, editFlashcard };
+  return { getFlashCards, deleteFlashcard, editFlashcard, createFlashCards };
 };
