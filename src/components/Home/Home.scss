@@ -135,8 +135,13 @@
     }
   }
   .flashcards__header {
-    @include Flex();
+    @include Flex($direction:column);
     padding: 1.5rem;
+    .btn_submit{
+      order:1;
+      margin-top: 2rem;
+      width: 100%;
+    }
   }
   @include Desktop {
     .flashcards__header {
@@ -145,6 +150,7 @@
         width: 30%;
       }
       .btn_submit{
+        order:-1;
         width: 30%;
       }
       padding: 1.5rem;

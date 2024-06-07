@@ -6,7 +6,7 @@ import "sweetalert2/src/sweetalert2.scss";
 
 export const FlashCardItem = ({ _id, question, answer, setModalInfo }) => {
   const [isFlipped, setIsFlipped] = useState(false);
-  const { editFlashcard, deleteFlashcard } = useFlashCards();
+  const { deleteFlashcard } = useFlashCards();
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
@@ -36,13 +36,13 @@ export const FlashCardItem = ({ _id, question, answer, setModalInfo }) => {
     });
   };
 
-  const handleEdit = () => {
+  const handleOpenModal = () => {
     setModalInfo({
       title: "Flashcards",
       typeForm: "dasd",
       open:true,
       dataToEdit: {
-        id:_id,question,answer
+        _id,question,answer
       }
     });
   };
@@ -52,7 +52,7 @@ export const FlashCardItem = ({ _id, question, answer, setModalInfo }) => {
       <div className={isFlipped ? "flashcard rotate" : "flashcard"}>
         <div className="face anverse">
           <div className="flashcards_settings">
-            <button onClick={handleEdit} className="settings btn_change">
+            <button onClick={handleOpenModal} className="settings btn_change">
               <Icono name="pencil" />
             </button>
             <button className="btn_rotate" onClick={handleFlip}>

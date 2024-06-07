@@ -3,7 +3,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import { useFlashCards } from "../../hooks/useFlashCards";
 
-export const FormFlashcard = ({ id = "", question = "", answer = "" }) => {
+export const FormFlashcard = ({ _id = "", question = "", answer = "" }) => {
   const { formState, onInputChange, resetForm } = useForm({ answer, question });
   const { editFlashcard, createFlashCards } = useFlashCards();
   const { question: questionText, answer: answerText } = formState;
@@ -20,8 +20,8 @@ export const FormFlashcard = ({ id = "", question = "", answer = "" }) => {
         return;
       }
 
-      if (id) {
-        await editFlashcard(id, questionText, answerText);
+      if (_id) {
+        await editFlashcard(_id, questionText, answerText);
         Swal.fire({
           position: "bottom-end",
           icon: "success",
