@@ -7,13 +7,12 @@ import { TopicsAndFlashcards } from "../../context/Topics/TopicsAndFlashcardsCon
 export const TopicsList = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { selectTopic } = useTopics();
-  const { topics } = useContext(TopicsAndFlashcards);
+  const { topics,currentTopic } = useContext(TopicsAndFlashcards);
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
 
- 
   return (
     <section className="topic section container">
       <ul className="container_list-topics">
@@ -33,11 +32,13 @@ export const TopicsList = () => {
             </li>
             <li className="topics__container scroll">
               <ul className="topics__list">
-                {topics.map((topic) => {
+                {topics.map((topic,i) => {
                   return (
-                    <li onClick={()=> selectTopic(topic._id)} className="topic__item" key={topic.name}>
-                      <span>{topic.name}</span>
-                      
+                    <li  className={`topic__item ${currentTopic === topic._id ? 'selected': ''}`} key={topic.name}>
+                      <label onClick={() => selectTopic(topic._id)} className="topic__name" htmlFor={`topic__id-${i}`}>
+                        <input type="radio" name="topic__item" id={`topic__id-${i}`} checked={currentTopic === topic._id} />
+                        <span>{topic.name}</span>
+                      </label>
                       <div className="topics__settings">
                         <button className="topics__setting topics__edit">
                           <Icono name="pencil" />

@@ -119,7 +119,9 @@
     border: 2px solid #bf6666;
 }
 
-
+body{
+    background-color: #eee;
+}
 
 /* **** animations **** */
 @keyframes openTopics {
@@ -219,7 +221,7 @@
         width: 100%;
     }
     .topic__item{
-        padding: 1.5rem;
+        padding: 1rem;
         @include Flex($justify: space-between);
         box-shadow: 0px 1px 1px rgba($color: $blackColor, $alpha: 0.3);
         transition: background .3s ease-in-out;
@@ -485,8 +487,6 @@
             margin: 0;
             margin-right: 2rem;
         }
-
-
     }
 
 }
@@ -494,7 +494,6 @@
 /* **** modal **** */
 .overlay {
     @extend %overlay;
-
     .modal {
         background-color: #fff;
         max-width: 95%;

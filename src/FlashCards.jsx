@@ -4,6 +4,7 @@ import { UserProvider } from "./context/UserProvider.jsx";
 import { PrivateRoute } from "./guards/PrivateRoute.jsx";
 import { PublicRoute } from "./guards/PublicRoute.jsx";
 import { TopicsAndFlashcardsProvider } from "./context/Topics/TopicsAndFlashcardsProvider.jsx";
+import { PageNotFound } from "./utils/PageNotFound/PageNotFound.jsx";
 
 const FlashCards = () => {
   return (
@@ -35,6 +36,12 @@ const FlashCards = () => {
                 {" "}
                 <SignUp />{" "}
               </PublicRoute>
+            }
+          />
+          <Route
+            path="/*"
+            element={
+                <PageNotFound />
             }
           />
         </Routes>

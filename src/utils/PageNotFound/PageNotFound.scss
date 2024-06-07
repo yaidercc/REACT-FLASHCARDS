@@ -1,0 +1,22 @@
+@import "../../styles/base/colors";
+@import "../../styles/base/mixins";
+
+.pageNotFound {
+  @include Flex($direction: column);
+  height: 100vh;
+  h1 {
+    font-size: 8rem;
+  }
+  h1,
+  p {
+    margin-bottom: 2rem;
+  }
+  p {
+    font-size: 2rem;
+  }
+
+  .btn-return {
+    background-color: $principalColor;
+    width: 10rem;
+  }
+}

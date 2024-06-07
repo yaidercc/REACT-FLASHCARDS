@@ -56,16 +56,16 @@
 }
 
 .submenu_topics {
-  width: 100%;
+  width: 90%;
   position: absolute;
   z-index: 10;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   background-color: #fff;
 }
 
-.btn_open-topics:hover {
+@include responsive(768px) {
   .submenu_topics {
-    display: block;
+    width: 100%;
   }
 }
 
@@ -75,6 +75,21 @@
   }
 }
 
+.btn_open-topics:hover {
+  .submenu_topics {
+    display: block;
+  }
+}
+.topic__name {
+  width: 90%;
+  @include Flex($align: center, $justify: flex-start);
+  gap: 1rem;
+  cursor: pointer;
+  input {
+    height: 4rem;
+    width: auto;
+  }
+}
 .btn_topics {
   width: 100%;
   outline: 1px solid $blackColor;
@@ -111,6 +126,7 @@
   grid-template-columns: repeat(1fr);
   grid-gap: 2rem;
   overflow-y: auto;
+  background-color: #fff;
 }
 
 .flashcards_settings {
