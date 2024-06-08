@@ -13,7 +13,7 @@ export const FlashCardContainer = () => {
   }, [currentTopic, topics]);
 
   return (
-    <div className="flashCardContainer">
+    <div className="flashCard__container">
       <TopicsList />
       <h3>{topicName}</h3>
       <FlashCardsList />

@@ -1,6 +1,6 @@
 export const About = () => {
   return (
-    <section className="section container definition_flashcard">
+    <section className="section container definition__flashcard">
       <div className="definition">
         <h3>que son las flashcards</h3>
         <p>

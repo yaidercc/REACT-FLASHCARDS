@@ -250,48 +250,9 @@ body{
     }
 }
 
-.topic {
-    cursor: pointer;
-    &.active,
-    &:hover {
-        span {
-            color: $blackColor;
-            font-weight: 400;
-        }
 
-        transition: .2s box-shadow ease-in-out;
 
-    }
 
-    span {
-        color: $noSelected;
-
-        text-overflow: ellipsis;
-    }
-}
-
-@media (min-width:768px) {
-    .btn_topics {
-        width: 30rem;
-    }
-}
-
-.container_new-topic {
-    display: flex;
-    justify-content: flex-end;
-    padding: 2rem;
-    box-shadow: 0px -1px 1px rgba($color: $blackColor, $alpha: 0.3);
-
-    a {
-        display: flex;
-        align-items: center;
-
-        span {
-            margin-left: 1rem;
-            font-size: 1.7rem;
-        }
-    }
-}
 
 /* **** flashcard managment **** */
 #topic_title {
@@ -317,98 +278,9 @@ body{
 
 /* **** flashcard  **** */
 
-.flashcard {
-    position: relative;
-    width: 100%;
-    height: 25rem;
-    transform-style: preserve-3d;
-    transition: transform 1s ease;
-    
-    .face {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      background-color: $blackColor;
-      color: #fff;
-    }
-  
-    &.rotate {
-      transform: rotateY(180deg);
-    }
-  
-    .anverse {
-      z-index: 2; /* Ensure front face is on top when not flipped */
-    }
-  
-    .overse {
-      transform: rotateY(180deg);
-    }
-  
-    .flashcards_settings {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  
-    .inpt_question {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 70%;
-      text-align: center;
-      padding: 0 2rem;
-    }
-  }
-  
-  @media (min-width: 768px) {
-    .flashcard  {
-        height: 35rem;
-    }
-}
 
-
-
-.flashcards_settings {
-    position: relative;
-
-    a {
-        padding: 1rem;
-        color: #fff;
-        font-size: 2rem;
-    }
-
-    .btn_rotate {
-        font-size: 2.5rem;
-    }
-
-    .settings {
-        position: absolute;
-        top: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .btn_change {
-        left: 0;
-        background-color: $paletteColor;
-    }
-
-    .btn_delete {
-        right: 0;
-        background-color: $deleteColor;
-
-        ion-icon {
-            color: #ffff;
-        }
-    }
-}
 
 .delete_topic {
-   
     .btn_delete-topic {
         width: 100%;
     }

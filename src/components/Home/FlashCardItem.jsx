@@ -1,6 +1,4 @@
 import { useState } from "react";
-import Swal from "sweetalert2/dist/sweetalert2.js";
-import "sweetalert2/src/sweetalert2.scss";
 import { useFlashCards } from "../../hooks/useFlashCards.js";
 import Icono from "../../plugins/icon.jsx";
 import { alert, alertQuestion, alertSuccess } from "../../utils/alerts/alert.js";
@@ -40,16 +38,16 @@ export const FlashCardItem = ({ _id, question, answer, setModalInfo }) => {
 
   return (
     <>
-      <div className={isFlipped ? "flashcard rotate" : "flashcard"}>
+      <div className={ `flashcard ${isFlipped ? 'rotate': ''}`}>
         <div className="face anverse">
-          <div className="flashcards_settings">
-            <button onClick={handleOpenModal} className="settings btn_change">
+          <div className="flashcards__settings">
+            <button onClick={handleOpenModal} className="settings btn__change">
               <Icono name="pencil" />
             </button>
             <button className="btn_rotate" onClick={handleFlip}>
               <Icono name="rotate" />
             </button>
-            <button onClick={handleDelete} className="settings btn_delete" data-id="1">
+            <button onClick={handleDelete} className="settings btn__delete" data-id="1">
               <Icono name="trash" />
             </button>
           </div>
@@ -58,7 +56,7 @@ export const FlashCardItem = ({ _id, question, answer, setModalInfo }) => {
           </div>
         </div>
         <div className="face overse">
-          <div className="flashcards_settings">
+          <div className="flashcards__settings">
             <button className="btn_rotate back" onClick={handleFlip}>
               <Icono name="rotate" />
             </button>

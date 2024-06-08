@@ -60,17 +60,17 @@ export const TopicsList = () => {
   };
 
   return (
-    <section className="topic section container">
+    <section className="topics section container">
       {modalInfo.open && <Modal {...modalInfo} onClose={onClose} />}
-      <ul className="container_list-topics">
-        <li className="btn_open-topics">
-          <button className="btn_topics" onClick={handleOpen}>
+      <ul className="topics__container--list">
+        <li className="topics__list--btn">
+          <button className="topics__btn" onClick={handleOpen}>
             <span>Temarios</span>
             <span className={isOpen ? "arrowIcon rotate__arrow" : "arrowIcon"}>
               <Icono name="arrowDown" />
             </span>
           </button>
-          <ul className={isOpen ? "submenu_topics" : "submenu_topics hide"}>
+          <ul className={isOpen ? "topics__submenu" : "topics__submenu hide"}>
             <li>
               <div className="input_search" data-search="temarios">
                 <input type="search" name="search" placeholder="Buscar temarios" onChange={searchTopic} />
@@ -99,8 +99,8 @@ export const TopicsList = () => {
                 })}
               </ul>
             </li>
-            <div className="container_new-topic">
-              <button onClick={handleOpenModal} className="btn__addTopic">
+            <div className="topics__container--newTopic">
+              <button onClick={handleOpenModal} className="topics__addTopic">
                 <Icono name="add" />
                 <span>Nuevo</span>
               </button>

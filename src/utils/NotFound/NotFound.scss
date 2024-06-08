@@ -1,0 +1,12 @@
+@import "../../styles/base/mixins";
+.NotFound {
+  @include Flex($direction: column);
+  height: 50vh; 
+  h3{
+    font-size:2rem;
+  }
+    & .icono{
+        margin-bottom: 2rem;
+        width: 5rem!important;
+    }
+}

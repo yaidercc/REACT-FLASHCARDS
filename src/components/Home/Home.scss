@@ -36,98 +36,132 @@
   }
 }
 
-.flashCardContainer {
+.flashCard__container {
   h3 {
     text-align: center;
   }
 }
 
-.container_list-topics {
-  width: 100%;
-}
 .topics {
-  &__settings {
-    @include Flex();
-  }
-}
-
-@include responsive(768px) {
-  .container_list-topics {
-    width: auto;
-    position: relative;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
-
-.submenu_topics {
-  width: 90%;
-  position: absolute;
-  z-index: 10;
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-  background-color: #fff;
-}
-
-@include responsive(768px) {
-  .submenu_topics {
-    width: 100%;
-  }
-}
-
-.btn_open-topics:hover {
-  .submenu_topics {
-    display: block;
-  }
-}
-
-.btn_open-topics:hover {
-  .submenu_topics {
-    display: block;
-  }
-}
-
-.topic__name {
-  width: 90%;
-  @include Flex($align: center, $justify: flex-start);
-  gap: 1rem;
   cursor: pointer;
-  input {
-    height: 4rem;
-    width: auto;
-  }
-}
-.btn_topics {
-  width: 100%;
-  outline: 1px solid $blackColor;
-  padding: 1.2rem 2rem;
-  padding-bottom: 1rem;
-  background-color: #fff;
-  @include Flex($justify: space-between);
-
-  span {
-    margin-right: 1rem;
-  }
-
+  &.active,
   &:hover {
-    box-shadow: 3px 3px 5px rgba($color: $blackColor, $alpha: 0.3);
+    span {
+      color: $blackColor;
+      font-weight: 400;
+    }
     transition: 0.2s box-shadow ease-in-out;
   }
-}
+  span {
+    color: $noSelected;
+    text-overflow: ellipsis;
+  }
+  &__container--list {
+    width: 100%;
+  }
+  .topics {
+    &__settings {
+      @include Flex();
+    }
+  }
 
-.arrowIcon {
-  transition: transform 0.3s ease-in-out;
-  &.rotate__arrow {
-    transform: rotate(180deg);
+  .topics__list--btn:hover {
+    .topics__submenu {
+      display: block;
+    }
+  }
+
+  .topics__list--btn:hover {
+    .topics__submenu {
+      display: block;
+    }
+  }
+
+  .topics__container--newTopic {
+    display: flex;
+    justify-content: flex-end;
+    padding: 2rem;
+    box-shadow: 0px -1px 1px rgba($color: $blackColor, $alpha: 0.3);
+
+    a {
+      display: flex;
+      align-items: center;
+
+      span {
+        margin-left: 1rem;
+        font-size: 1.7rem;
+      }
+    }
+  }
+
+  &__submenu {
+    width: 90%;
+    position: absolute;
+    z-index: 10;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    background-color: #fff;
+  }
+  .topic__name {
+    width: 90%;
+    @include Flex($align: center, $justify: flex-start);
+    gap: 1rem;
+    cursor: pointer;
+    input {
+      height: 4rem;
+      width: auto;
+    }
+  }
+  .topics__btn {
+    width: 100%;
+    outline: 1px solid $blackColor;
+    padding: 1.2rem 2rem;
+    padding-bottom: 1rem;
+    background-color: #fff;
+    @include Flex($justify: space-between);
+  
+    span {
+      margin-right: 1rem;
+    }
+  
+    &:hover {
+      box-shadow: 3px 3px 5px rgba($color: $blackColor, $alpha: 0.3);
+      transition: 0.2s box-shadow ease-in-out;
+    }
+  }
+
+  &__addTopic {
+    @include Flex();
+  }
+  
+  .arrowIcon {
+    transition: transform 0.3s ease-in-out;
+    &.rotate__arrow {
+      transform: rotate(180deg);
+    }
+  }
+
+  @include responsive(768px) {
+    &__container--list {
+      width: auto;
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .topics__btn {
+      width: 30rem;
+    }
+    &__submenu {
+      width: 100%;
+    }
   }
 }
 
-.btn__addTopic {
-  @include Flex();
-}
+
 .container__flashcards {
   background-color: #fff;
   box-shadow: 3px 3px 5px rgba($color: $blackColor, $alpha: 0.1);
+  border-radius: 1.2rem;
   .content__flashcards {
     height: 50rem;
     padding: 1rem;
@@ -137,12 +171,101 @@
     grid-gap: 2rem;
     overflow-y: auto;
   }
-  .flashcards_settings {
+
+  .flashcard {
+    position: relative;
+    width: 100%;
+    height: 25rem;
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+    
+    .face {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      background-color: $blackColor;
+      color: #fff;
+    }
+  
+    &.rotate {
+      transform: rotateY(180deg);
+    }
+  
+    .anverse {
+      z-index: 2; 
+      border-radius: 1.2rem;
+    }
+  
+    .overse {
+      transform: rotateY(180deg);
+    }
+  
+    .flashcards__settings {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+    }
+  
+    .inpt_question {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 70%;
+      text-align: center;
+      padding: 0 2rem;
+    }
+  }
+  
+  @include responsive (768px) {
+    .flashcard  {
+        height: 35rem;
+    }
+  }
+  
+  .flashcards__settings {
+    position: relative;
+  
+    a {
+        padding: 1rem;
+        color: #fff;
+        font-size: 2rem;
+    }
+  
     button {
       padding: 1rem;
       color: #fff;
     }
+
+    .btn__rotate {
+        font-size: 2.5rem;
+    }
+  
+    .settings {
+        position: absolute;
+        top: 0;
+        @include Flex()
+    }
+  
+    .btn__change {
+        left: 0;
+        background-color: $paletteColor;
+        border-radius: 1.2rem 0 0 0 ;
+    }
+
+    .btn__delete {
+      border-radius: 0 1.2rem 0 0 ;
+        right: 0;
+        background-color: $deleteColor;
+        ion-icon {
+            color: #ffff;
+        }
+    }
   }
+  
   .flashcards__header {
     @include Flex($direction: column);
     padding: 1.5rem;
@@ -167,14 +290,14 @@
   }
 }
 
-@media (min-width: 768px) {
+@include responsive (768px) {
   .content__flashcards {
     grid-template-columns: repeat(2, 1fr);
     padding: 1rem;
   }
 }
 
-.definition_flashcard {
+.definition__flashcard {
   overflow: hidden;
   @include Flex($direction: column);
 
@@ -210,7 +333,7 @@
 }
 
 @media (min-width: 768px) {
-  .definition_flashcard {
+  .definition__flashcard {
     display: flex;
     flex-direction: row;
 
