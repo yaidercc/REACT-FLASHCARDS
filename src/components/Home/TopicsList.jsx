@@ -1,5 +1,5 @@
 import Icono from "../../plugins/icon.jsx";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useTopics } from "../../hooks";
 import { Modal } from "../../utils/Modal/Modal.jsx";
 import { TopicsAndFlashcards } from "../../context/Topics/TopicsAndFlashcardsContext.jsx";
@@ -12,10 +12,28 @@ export const TopicsList = () => {
   const { topics, currentTopic } = useContext(TopicsAndFlashcards);
   const [modalInfo, setModalInfo] = useState({ title: "", typeForm: "", open: false, dataToEdit: {} });
   const [topicsItems, setTopicsItems] = useState(topics);
-
+  const topicsListRef = useRef();
+  
   useEffect(() => {
     setTopicsItems(topics);
   }, [topics]);
+
+  const handleClickOutside = (event) => {
+    if (topicsListRef.current && !topicsListRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('click', handleClickOutside);
+    } else {
+      document.removeEventListener('click', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isOpen]);
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
@@ -38,7 +56,7 @@ export const TopicsList = () => {
 
   const handleDelete = async (id) => {
     try {
-      const { isConfirmed } = await alertQuestion("¿Estas seguro deseas eliminar este temario?");
+      const { isConfirmed } = await alertQuestion("Si eliminas este temario eliminarios todos sus flashcards. ¿Estas seguro?");
       if (isConfirmed) {
         await deleteTopic(id);
         alertSuccess("Flashcard eliminada.")
@@ -62,7 +80,7 @@ export const TopicsList = () => {
   return (
     <section className="topics section container">
       {modalInfo.open && <Modal {...modalInfo} onClose={onClose} />}
-      <ul className="topics__container--list">
+      <ul className="topics__container--list" ref={topicsListRef}>
         <li className="topics__list--btn">
           <button className="topics__btn" onClick={handleOpen}>
             <span>Temarios</span>

@@ -30,7 +30,7 @@ const FlashCards = () => {
             }
           />
           <Route
-            path="/signup"
+            path="/singup"
             element={
               <PublicRoute>
                 {" "}

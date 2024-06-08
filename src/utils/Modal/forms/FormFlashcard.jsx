@@ -21,7 +21,7 @@ export const FormFlashcard = ({ _id = "", question = "", answer = "" }) => {
         await editFlashcard(_id, questionText, answerText);
         title = "Flashcard editada con exito"
       } else {
-        await createFlashCards(answerText, questionText);
+        await createFlashCards(questionText,answerText);
         title = "Flashcard creada con exito"
         resetForm();
       }

@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import axios from "../helpers/fetchApi";
 import { UserContext } from "../context/UserContext";
 import Cookies from 'js-cookie';
-
+import {alert } from "../utils/alerts/alert"
 export const useAuth = () => {
   
   const { setUser, setIsAuthenticated,setIsLoading } = useContext(UserContext);
@@ -22,26 +22,32 @@ export const useAuth = () => {
       setIsLoading(false)
       setUser(user);
     } catch (error) {
+      setIsLoading(false)
       const errorInfo = error.response;
       if (errorInfo.status === 401) {
         setIsAuthenticated(false);
         setUser({});
-        setIsLoading(false)
+      }
+
+      if(errorInfo.status === 400){
+        console.log()
+        alert(errorInfo.data.errors.msg)
       }
     }
   };
 
   const Logout = async () => {
     try {
-      await axios.post("/auth/logut");
+      await axios.get("/auth/logout");
       setUser({});
       setIsAuthenticated(false);
-      console.log(Cookies)
+      localStorage.removeItem("topic")
+      // console.log(Cookies)
       Cookies.remove('connect.sid');
 
     } catch (error) {
       const errorInfo = error.response?.msg;
-      alert(errorInfo);
+      console.log(error.response);
     }
   };
 

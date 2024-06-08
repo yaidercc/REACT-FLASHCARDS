@@ -1,11 +1,15 @@
 @import "../../styles/base/mixins";
 @import "../../styles/base/vars";
 @import "../../styles/base/colors";
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
 .menu {
   @include Flex($justify: space-between);
   padding: 2rem 0;
-
+  h1{
+    font-family: "Lobster", sans-serif;
+    font-size: 3rem;
+  }
   .profile {
     position: relative;
     padding: 0 2rem;
@@ -34,6 +38,12 @@
       }
     }
   }
+
+  @include responsive(768px){
+    h1{
+      font-size: 4.5rem;
+    }
+  }
 }
 
 .flashCard__container {
@@ -43,7 +53,13 @@
 }
 
 .topics {
+  margin-top: 1rem!important;
   cursor: pointer;
+
+  &__settings {
+    @include Flex();
+  }
+
   &.active,
   &:hover {
     span {
@@ -58,11 +74,6 @@
   }
   &__container--list {
     width: 100%;
-  }
-  .topics {
-    &__settings {
-      @include Flex();
-    }
   }
 
   .topics__list--btn:hover {
