@@ -36,6 +36,12 @@
   }
 }
 
+.flashCardContainer {
+  h3 {
+    text-align: center;
+  }
+}
+
 .container_list-topics {
   width: 100%;
 }
@@ -80,6 +86,7 @@
     display: block;
   }
 }
+
 .topic__name {
   width: 90%;
   @include Flex($align: center, $justify: flex-start);
@@ -95,6 +102,7 @@
   outline: 1px solid $blackColor;
   padding: 1.2rem 2rem;
   padding-bottom: 1rem;
+  background-color: #fff;
   @include Flex($justify: space-between);
 
   span {
@@ -106,6 +114,7 @@
     transition: 0.2s box-shadow ease-in-out;
   }
 }
+
 .arrowIcon {
   transition: transform 0.3s ease-in-out;
   &.rotate__arrow {
@@ -135,10 +144,10 @@
     }
   }
   .flashcards__header {
-    @include Flex($direction:column);
+    @include Flex($direction: column);
     padding: 1.5rem;
-    .btn_submit{
-      order:1;
+    .btn_submit {
+      order: 1;
       margin-top: 2rem;
       width: 100%;
     }
@@ -149,8 +158,8 @@
       input {
         width: 30%;
       }
-      .btn_submit{
-        order:-1;
+      .btn_submit {
+        order: -1;
         width: 30%;
       }
       padding: 1.5rem;

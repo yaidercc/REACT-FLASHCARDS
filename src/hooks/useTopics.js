@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useAuth } from "./useAuth";
 import { TopicsAndFlashcards } from "../context/Topics/TopicsAndFlashcardsContext";
 import axios from "../helpers/fetchApi";
@@ -6,7 +6,6 @@ import axios from "../helpers/fetchApi";
 export const useTopics = () => {
   const { Logout } = useAuth();
   const { topics, setTopics, currentTopic, setCurrentTopic } = useContext(TopicsAndFlashcards);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const currentTopic = localStorage.getItem("topic");
@@ -17,14 +16,25 @@ export const useTopics = () => {
     getTopics();
   }, []);
 
+  
+  const getTopics = async () => {
+    try {
+      const response = await axios.get("/topic");
+      const { Topics } = response.data;
+      setTopics(Topics);
+    } catch (error) {
+      const errorInfo = error?.response;
+      if (errorInfo?.status === 401) {
+        await Logout();
+      }
+    }
+  };
+
   const createTopic = async (name, description) => {
     try {
       const response = await axios.post(
         "/topic/createTopic",
         { name, description },
-        {
-          withCredentials: true,
-        }
       );
       const { topic } = response.data;
       setTopics([...topics, topic]);
@@ -38,7 +48,7 @@ export const useTopics = () => {
 
   const editTopic = async (id, name, description) => {
     try {
-      await axios.put(`/topic/editTopic/${id}`, { name, description }, { withCredentials: true });
+      await axios.put(`/topic/editTopic/${id}`, { name, description });
       setTopics(
         topics.map((topic) => {
           if (topic._id === id) {
@@ -59,26 +69,10 @@ export const useTopics = () => {
     }
   };
 
-  const getTopics = async () => {
-    try {
-      const response = await axios.get("/topic", {
-        withCredentials: true,
-      });
-      const { Topics } = response.data;
-      setTopics(Topics);
-    } catch (error) {
-      const errorInfo = error?.response;
-      if (errorInfo?.status === 401) {
-        await Logout();
-      }
-    }
-  };
 
   const deleteTopic = async (id) => {
     try {
-      await axios.delete(`/topic/deleteTopic/${id}`, {
-        withCredentials: true,
-      });
+      await axios.delete(`/topic/deleteTopic/${id}`);
       setTopics(topics.filter((topic) => topic._id !== id));
       if(id === currentTopic){
         setCurrentTopic("")

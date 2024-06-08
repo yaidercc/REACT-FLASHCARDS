@@ -1,8 +1,9 @@
-import { useContext, useState } from "react";
-import Icono from "../../plugins/icon.jsx";
-import { useFlashCards } from "../../hooks/useFlashCards.js";
+import { useState } from "react";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import { useFlashCards } from "../../hooks/useFlashCards.js";
+import Icono from "../../plugins/icon.jsx";
+import { alert, alertQuestion, alertSuccess } from "../../utils/alerts/alert.js";
 
 export const FlashCardItem = ({ _id, question, answer, setModalInfo }) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -12,38 +13,28 @@ export const FlashCardItem = ({ _id, question, answer, setModalInfo }) => {
     setIsFlipped(!isFlipped);
   };
 
-  const handleDelete = () => {
-    Swal.fire({
-      title: "¿Estas seguro?",
-      text: "Estas seguro deseas eliminar esta flashcard?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      cancelButtonText: "Cancelar",
-      confirmButtonText: "Aceptar",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
+  const handleDelete = async () => {
+    try {
+      const { isConfirmed } = await alertQuestion("Estas seguro deseas eliminar esta flashcard?");
+      if (isConfirmed) {
         await deleteFlashcard(_id);
-        Swal.fire({
-          position: "bottom-end",
-          icon: "success",
-          title: "Flashcard eliminada con exito.",
-          showConfirmButton: false,
-          timer: 1500
-        });
+        alertSuccess("Flashcard eliminada con exito.");
       }
-    });
+    } catch (error) {
+      alert("Hubo un error al realizar esta accion, intentalo mas tarde", "Oops...");
+    }
   };
 
   const handleOpenModal = () => {
     setModalInfo({
       title: "Flashcards",
       typeForm: "dasd",
-      open:true,
+      open: true,
       dataToEdit: {
-        _id,question,answer
-      }
+        _id,
+        question,
+        answer,
+      },
     });
   };
 

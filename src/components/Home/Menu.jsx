@@ -1,20 +1,19 @@
 import Avvvatars from "avvvatars-react";
+import Icono from "../../plugins/icon";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import Icono from "../../plugins/icon";
 import { UserContext } from "../../context/UserContext";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../hooks";
 
 export const Menu = () => {
-  const [openMenu, setOpenMenu] = useState(false);
-  const {user} = useContext(UserContext);
-  const {name, surname} = user;
-  const {Logout} = useAuth()
+  const [ openMenu, setOpenMenu ] = useState(false);
+  const { user } = useContext(UserContext);
+  const { name, surname } = user;
+  const { Logout } = useAuth()
 
   const handleMenu = () => {
     setOpenMenu(!openMenu);
   };
-
 
   return (
     <div className="menu container">

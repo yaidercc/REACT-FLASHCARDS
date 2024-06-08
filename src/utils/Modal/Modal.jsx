@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { FormFlashcard } from "./FormFlashcard";
-import { FormTopics } from "./FormTopics";
+import { FormFlashcard } from "./forms/FormFlashcard";
+import { FormTopics } from "./forms/FormTopics";
 
 export const Modal = ({ title, typeForm, open,onClose, dataToEdit }) => {
   return (

@@ -1,7 +1,6 @@
-import { useForm } from "../../hooks/useForm";
-import Swal from "sweetalert2/dist/sweetalert2.js";
-import "sweetalert2/src/sweetalert2.scss";
-import { useFlashCards } from "../../hooks/useFlashCards";
+import { useForm } from "../../../hooks/useForm";
+import { useFlashCards } from "../../../hooks";
+import { alert, alertSuccess } from "../../alerts/alert.js";
 
 export const FormFlashcard = ({ _id = "", question = "", answer = "" }) => {
   const { formState, onInputChange, resetForm } = useForm({ answer, question });
@@ -12,40 +11,25 @@ export const FormFlashcard = ({ _id = "", question = "", answer = "" }) => {
     event.preventDefault();
     try {
       if (!answerText.trim() || !questionText.trim()) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "La pregunta o la respuesta estan vacios.",
-        });
+        alert("La pregunta o la respuesta estan vacios.","Oops...",)
         return;
       }
 
-      if (_id) {
+      let title = '';
+
+      if (_id.trim()) {
         await editFlashcard(_id, questionText, answerText);
-        Swal.fire({
-          position: "bottom-end",
-          icon: "success",
-          title: "Flashcard editada con exito",
-          showConfirmButton: false,
-          timer: 2500,
-        });
+        title = "Flashcard editada con exito"
       } else {
         await createFlashCards(answerText, questionText);
+        title = "Flashcard creada con exito"
         resetForm();
-        Swal.fire({
-          position: "bottom-end",
-          icon: "success",
-          title: "Flashcard creada con exito",
-          showConfirmButton: false,
-          timer: 2500,
-        });
       }
+
+      alertSuccess(title);
+
     } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Hubo un error al realizar esta accion, intentalo mas tarde",
-      });
+      alert("Hubo un error al realizar esta accion, intentalo mas tarde","Oops...",)
     }
   };
   return (

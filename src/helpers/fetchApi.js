@@ -10,4 +10,15 @@ const instance = axios.create({
 
 // Interceptors
 
+instance.interceptors.request.use(
+  config => {
+    // Siempre envía withCredentials: true
+    config.withCredentials = true;
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
+
 export default instance;

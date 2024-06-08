@@ -1,10 +1,6 @@
-import Alert from "@mui/material/Alert";
-import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
-import { useForm } from "../../hooks/useForm";
+import { useAuth,useForm } from "../../hooks";
 import "./Auth.scss";
-import { UserContext } from "../../context/UserContext";
 
 export const Login = () => {
   const { username, password, onInputChange } = useForm({
@@ -12,15 +8,13 @@ export const Login = () => {
     password: "",
   });
   const {Login} = useAuth();
-  const { user } = useContext(UserContext)
 
   const submitForm = async (e) => {
     e.preventDefault();
     if (!username.trim()) alert("usuario vacio");
     if (!password.trim()) alert("clave vacia");
 
-    const response = await Login({username,password});
-    console.log(user);
+    await Login({username,password});
   };
 
   return (

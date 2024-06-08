@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from "react";
-import { FlashCardItem } from "./FlashCardItem";
 import { TopicsAndFlashcards } from "../../context/Topics/TopicsAndFlashcardsContext";
 import { Modal } from "../../utils/Modal/Modal";
-import { useFlashCards } from "../../hooks/useFlashCards";
+import { FlashCardItem } from "./FlashCardItem";
+import { useFlashCards } from "../../hooks";
+import { FlashCardListHeader } from "./FlashCardListHeader";
 
-export const FlashCardsContainer = () => {
+export const FlashCardsList = () => {
   useFlashCards();
   const [modalInfo, setModalInfo] = useState({ title: "", typeForm: "", open: false, dataToEdit: {} });
-  const { flashcards } = useContext(TopicsAndFlashcards);
+  const { flashcards,currentTopic } = useContext(TopicsAndFlashcards);
   const [FlashCardsItems, setFlashCardsItems] = useState(flashcards);
 
   useEffect(() => {
@@ -33,14 +34,7 @@ export const FlashCardsContainer = () => {
     <main className="flashcards mg-top container">
       {modalInfo.open && <Modal {...modalInfo} onClose={onClose} />}
       <div className="container__flashcards">
-        <div className="flashcards__header">
-          <div className="btn_submit">
-            <button onClick={() => setModalInfo({ ...modalInfo, title: "FlashCards", open: true })} className="btn">
-              Nueva Flashcard
-            </button>
-          </div>
-          <input type="search" name="search" placeholder="Buscar Flashcard" onChange={searchFlashcard} />
-        </div>
+        {currentTopic ? <FlashCardListHeader modalInfo={modalInfo} searchFlashcard={searchFlashcard} setModalInfo={setModalInfo} /> : null}
         <div className="content__flashcards scroll">
           {FlashCardsItems.map((flashcard) => {
             return <FlashCardItem key={flashcard._id} {...flashcard} setModalInfo={setModalInfo} />;

@@ -1,7 +1,6 @@
-import { useForm } from "../../hooks/useForm";
-import Swal from "sweetalert2/dist/sweetalert2.js";
-import "sweetalert2/src/sweetalert2.scss";
-import { useTopics } from "../../hooks/useTopics";
+import { useForm } from "../../../hooks/useForm";
+import { useTopics } from "../../../hooks/useTopics";
+import { alert, alertSuccess } from "../../alerts/alert.js";
 
 export const FormTopics = ({ _id = "", name = "", description = "" }) => {
   const { formState, onInputChange, resetForm } = useForm({ name, description });
@@ -12,13 +11,10 @@ export const FormTopics = ({ _id = "", name = "", description = "" }) => {
     event.preventDefault();
     try {
       if (!nameText.trim()) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "El nombre del temario es incorrecto o esta vacio.",
-        });
+        alert("El nombre del temario es incorrecto o esta vacio.", "Oops...");
         return;
       }
+
       let title = "";
 
       if (_id) {
@@ -30,23 +26,12 @@ export const FormTopics = ({ _id = "", name = "", description = "" }) => {
         title = "Temario creado con exito.";
       }
 
-      Swal.fire({
-        position: "bottom-end",
-        icon: "success",
-        title,
-        showConfirmButton: false,
-        timer: 2500,
-      });
+      alertSuccess(title);
     } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Hubo un error al realizar esta accion, intentalo mas tarde",
-      });
+      alert("Hubo un error al realizar esta accion, intentalo mas tarde","Oops...")
     }
   };
 
-  
   return (
     <form className="form" onSubmit={onSubmit}>
       <div className="input input_modal">

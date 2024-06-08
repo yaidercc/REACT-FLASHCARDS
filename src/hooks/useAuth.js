@@ -16,9 +16,6 @@ export const useAuth = () => {
           username,
           password,
         },
-        {
-          withCredentials: true,
-        }
       );
       const { user } = response.data;
       setIsAuthenticated(true);
@@ -36,9 +33,7 @@ export const useAuth = () => {
 
   const Logout = async () => {
     try {
-      await axios.post("/auth/logut", {
-        withCredentials: true,
-      });
+      await axios.post("/auth/logut");
       setUser({});
       setIsAuthenticated(false);
       console.log(Cookies)
