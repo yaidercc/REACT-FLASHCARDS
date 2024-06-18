@@ -1,11 +1,13 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import axios from "../helpers/fetchApi";
 import { UserContext } from "../context/UserContext";
-import Cookies from "js-cookie";
 import { alert, alertSuccess } from "../utils/alerts/alert";
+import { useNavigate } from "react-router-dom";
+import { TopicsAndFlashcards } from "../context/Topics/TopicsAndFlashcardsContext";
 export const useAuth = () => {
   const { setUser, setIsAuthenticated, setIsLoading } = useContext(UserContext);
-
+  const { setFlashcards, setTopics, setCurrentTopic } = useContext(TopicsAndFlashcards);
+  const navigate = useNavigate();
   const Login = async ({ username, password }) => {
     try {
       setIsLoading(true);
@@ -19,32 +21,29 @@ export const useAuth = () => {
       setUser(user);
     } catch (error) {
       setIsLoading(false);
-      const errorInfo = error.response;
-      if (errorInfo.status === 401) {
-        setIsAuthenticated(false);
-        setUser({});
-      }
-
-      if (errorInfo.status === 400) {
-        alert(errorInfo.data.errors.msg);
-      }
+      const errorInfo = error.response.data?.msg || error?.message || error.response.data?.errors?.msg;
+      alert(errorInfo);
     }
   };
 
-  const Singup = async({ name, surname, username, mail, password, repeatPassword }) => {
+  const Singup = async ({ name, surname, username, mail, password, repeatPassword }) => {
     try {
       setIsLoading(true);
       await axios.post("/auth/singup", {
-        name, surname, username, mail, password, repeatPassword
+        name,
+        surname,
+        username,
+        mail,
+        password,
+        repeatPassword,
       });
       setIsLoading(false);
-      alertSuccess("Registro exitoso")
+      alertSuccess("Registro exitoso");
+      navigate("/login");
     } catch (error) {
       setIsLoading(false);
-      const errorInfo = error.response;
-      if (errorInfo.status === 400) {
-        alert(errorInfo.data.errors.msg);
-      }
+      const errorInfo = error.response.data?.msg || error?.message || error.response.data?.errors?.msg;
+      alert(errorInfo);
     }
   };
 
@@ -52,12 +51,15 @@ export const useAuth = () => {
     await axios.get("/auth/logout");
     setUser({});
     setIsAuthenticated(false);
+    setFlashcards([]);
+    setTopics([]);
+    setCurrentTopic(null);
     localStorage.removeItem("topic");
   };
 
   return {
     Login,
     Logout,
-    Singup
+    Singup,
   };
 };

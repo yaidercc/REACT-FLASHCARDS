@@ -8,15 +8,15 @@ import { FieldError } from "../../utils/Form/FieldError.jsx";
 
 export const SignUp = () => {
   const { name, surname, username, mail, password, repeatPassword, onInputChange, handleSetErrors, getErrorMessage } = useForm({
-    name: "",
-    surname: "",
-    username: "",
-    mail: "",
-    password: "",
-    repeatPassword: "",
+    name: "yaider",
+    surname: "cordoba",
+    username: "yaidercc",
+    mail: "yaider@gmail.om",
+    password: "Yaidercc123*",
+    repeatPassword: "Yaidercc123*",
   });
   const { Singup } = useAuth();
-  const navigate = useNavigate();
+  
 
   const onSubmit = async (event) => {
     try {
@@ -40,7 +40,7 @@ export const SignUp = () => {
         mail,
         password,
       });
-      navigate("/login");
+     
     } catch (error) {
       if (error.name === "ValidationError") handleSetErrors(error.inner);
       else throw error;
@@ -48,7 +48,7 @@ export const SignUp = () => {
   };
 
   return (
-    <div className="container__form">
+    <div className="container container__form">
       <div className="content__form">
         <form className="form" onSubmit={onSubmit}>
           <div className="form__header">

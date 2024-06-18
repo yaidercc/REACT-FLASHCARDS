@@ -7,7 +7,6 @@ export const TopicsAndFlashcardsProvider = ({children}) => {
     const [topics, setTopics] = useState([]);
     const [currentTopic, setCurrentTopic] = useState(null);
     
-
     return (
         <TopicsAndFlashcards.Provider 
         value={{flashcards, setFlashcards, topics, setTopics, currentTopic, setCurrentTopic}}

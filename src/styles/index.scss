@@ -425,10 +425,11 @@ body {
 
 .container__form {
   @include Flex();
-  background-color: #eee;
-  height: 100vh;
+  margin-top: 2rem;
+  height: 90%;
   .content__form {
-    height: auto;
+    
+    margin-bottom: 3rem;
     border-radius: 1rem;
     padding: 2rem 1.5rem;
     background-color: #fff;
@@ -439,7 +440,10 @@ body {
     }
   }
   @include Desktop {
+    height: 90vh;
     .content__form {
+      margin-bottom: 0;
+      max-width: 50%;
       height: auto;
       border-radius: none;
       padding: 2rem 4rem;

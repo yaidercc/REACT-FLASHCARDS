@@ -13,7 +13,6 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.15.19",
-    "avvvatars-react": "^0.4.2",
     "axios": "^1.7.2",
     "js-cookie": "^3.0.5",
     "normalize.css": "^8.0.1",

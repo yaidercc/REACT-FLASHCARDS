@@ -12,7 +12,6 @@ export const useTopics = () => {
     if (currentTopic) {
       setCurrentTopic(currentTopic);
     }
-
     getTopics();
   }, []);
 

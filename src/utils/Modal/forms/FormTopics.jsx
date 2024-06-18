@@ -2,7 +2,7 @@ import { useForm } from "../../../hooks/useForm";
 import { useTopics } from "../../../hooks/useTopics";
 import { alert, alertSuccess } from "../../alerts/alert.js";
 
-export const FormTopics = ({ _id = "", name = "", description = "" }) => {
+export const FormTopics = ({ _id = "", name = "", description = "", onClose }) => {
   const { formState, onInputChange, resetForm } = useForm({ name, description });
   const { name: nameText, description: descriptionText } = formState;
   const { createTopic, editTopic } = useTopics();
@@ -25,7 +25,7 @@ export const FormTopics = ({ _id = "", name = "", description = "" }) => {
         resetForm();
         title = "Temario creado con exito.";
       }
-
+      onClose()
       alertSuccess(title);
     } catch (error) {
       alert("Hubo un error al realizar esta accion, intentalo mas tarde","Oops...")
@@ -40,7 +40,7 @@ export const FormTopics = ({ _id = "", name = "", description = "" }) => {
       </div>
       <div className="input input_modal">
         <label>ingrese la descripcion (Opcional)</label>
-        <textarea name="description" type="text" value={descriptionText} placeholder="EJ: jupiter" onChange={onInputChange}></textarea>
+        <textarea name="description" type="text" value={descriptionText} placeholder="EJ: temario para estudiar las tablas de multiplicar" onChange={onInputChange}></textarea>
       </div>
       <div className="btn_submit">
         <ion-icon name="save"></ion-icon>

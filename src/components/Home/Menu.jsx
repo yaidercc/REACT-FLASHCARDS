@@ -1,4 +1,4 @@
-import Avvvatars from "avvvatars-react";
+
 import Icono from "../../plugins/icon";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -6,9 +6,9 @@ import { UserContext } from "../../context/UserContext";
 import { useAuth } from "../../hooks";
 
 export const Menu = () => {
-  const [ isOpen, setIsOpen ] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const { user } = useContext(UserContext);
-  const { name, surname,profile_img } = user;
+  const { profile_img } = user;
   const { Logout } = useAuth();
   const menuRef = useRef();
 
@@ -24,18 +24,20 @@ export const Menu = () => {
 
   useEffect(() => {
     if (isOpen) {
-      document.addEventListener('click', handleClickOutside);
+      document.addEventListener("click", handleClickOutside);
     } else {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     }
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [isOpen]);
 
   return (
     <div className="menu container">
-      <h1>Flashcards</h1>
+      <Link to="/">
+        <h1>Flashcards</h1>
+      </Link>
       <div className="menu__profile" ref={menuRef}>
         <button onClick={handleMenu} className="btn__profile">
           <img src={profile_img} alt="profile img" className="profile_img" />
@@ -43,13 +45,13 @@ export const Menu = () => {
             <Icono name="arrowDown" />
           </span>
         </button>
-        
-        <ul  className={`profile__options ${isOpen ? 'open' : 'hide' }`}>
+
+        <ul className={`profile__options ${isOpen ? "open" : "hide"}`}>
           <li>
             <Link to="/profile">Perfil</Link>
           </li>
           <li onClick={Logout}>
-            <button >Salir</button>
+            <button>Salir</button>
           </li>
         </ul>
       </div>

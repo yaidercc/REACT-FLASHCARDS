@@ -11,7 +11,7 @@ export const Modal = ({ title, typeForm, open,onClose, dataToEdit }) => {
             X
           </button>
         </div>
-        <div>{typeForm === "topic" ? <FormTopics {...dataToEdit} /> : <FormFlashcard {...dataToEdit} />}</div>
+        <div>{typeForm === "topic" ? <FormTopics {...dataToEdit} onClose={onClose} /> : <FormFlashcard {...dataToEdit} onClose={onClose} />}</div>
       </div>
     </div>
   );

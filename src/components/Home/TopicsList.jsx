@@ -59,7 +59,7 @@ export const TopicsList = () => {
       const { isConfirmed } = await alertQuestion("Si eliminas este temario eliminarios todos sus flashcards. ¿Estas seguro?");
       if (isConfirmed) {
         await deleteTopic(id);
-        alertSuccess("Flashcard eliminada.")
+        alertSuccess("Temario eliminado.")
       }
     } catch (error) {
       alert("Hubo un error al realizar esta accion, intentalo mas tarde", "Oops...");
@@ -120,7 +120,7 @@ export const TopicsList = () => {
             <div className="topics__container--newTopic">
               <button onClick={handleOpenModal} className="topics__addTopic">
                 <Icono name="add" />
-                <span>Nuevo</span>
+                <span>Crear</span>
               </button>
             </div>
           </ul>

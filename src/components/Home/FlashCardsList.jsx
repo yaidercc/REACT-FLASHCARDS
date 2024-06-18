@@ -32,7 +32,7 @@ export const FlashCardsList = () => {
   };
 
   const notFoundMessage = ()=>{
-    if(!currentTopic) return "Debeses seleccionar un temario"
+    if(!currentTopic) return "Selecciona un temario"
     if(!FlashCardsItems.length) return "No se encontraron flashcards"
 
     return false;
@@ -40,7 +40,7 @@ export const FlashCardsList = () => {
 
 
   return (
-    <main className="flashcards mg-top container">
+    <main className="flashcards container">
       {modalInfo.open && <Modal {...modalInfo} onClose={onClose} />}
       <div className="container__flashcards">
 

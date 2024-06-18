@@ -5,7 +5,6 @@
 
 .menu {
   @include Flex($justify: space-between);
-  padding: 2rem 0;
   h1 {
     font-family: "Lobster", sans-serif;
     font-size: 3rem;
@@ -13,6 +12,7 @@
   .menu__profile {
     position: relative;
     padding: 0 2rem;
+    padding-right: 0;
     .btn__profile {
       @include Flex();
     }
@@ -21,7 +21,7 @@
       height: 4.2rem;
       border-radius: 50%;
     }
-    &__options {
+    .profile__options {
       background-color: #f9f8f8;
       position: absolute;
       z-index: 100;
@@ -52,9 +52,13 @@
 }
 
 .flashCard__container {
-  h3 {
+  h3,p {
     text-align: center;
   }
+  p{
+    margin-top: 1rem;
+  }
+
 }
 
 .topics {
@@ -79,6 +83,9 @@
   }
   &__container--list {
     width: 100%;
+  }
+  .topics__submenu{
+    border: 1px solid #646464;
   }
 
   .topics__list--btn:hover {
@@ -172,7 +179,9 @@
     }
   }
 }
-
+.flashcards.container{
+  margin-top: 2.2rem;
+}
 .container__flashcards {
   background-color: #fff;
   box-shadow: 3px 3px 5px rgba($color: $blackColor, $alpha: 0.1);
@@ -188,6 +197,7 @@
   }
 
   .flashcard {
+    
     position: relative;
     width: 100%;
     height: 25rem;

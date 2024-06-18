@@ -5,17 +5,18 @@ import { TopicsAndFlashcards } from "../../context/Topics/TopicsAndFlashcardsCon
 
 export const FlashCardContainer = () => {
   const { topics, currentTopic } = useContext(TopicsAndFlashcards);
-  const [topicName, setTopicName] = useState("");
+  const [topicName, setTopicName] = useState({name:"",description:""});
 
   useEffect(() => {
     const topicName = topics.find((topic) => topic._id === currentTopic);
-    setTopicName(topicName?.name || "");
+    setTopicName({name: topicName?.name || "" , description:topicName?.description || ""});
   }, [currentTopic, topics]);
 
   return (
     <div className="flashCard__container">
       <TopicsList />
-      <h3>{topicName}</h3>
+      <h3>{topicName.name}</h3>
+      <p>{topicName.description}</p>
       <FlashCardsList />
     </div>
   );

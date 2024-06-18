@@ -24,7 +24,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="container__form" onSubmit={submitForm}>
+    <div className="container container__form login" onSubmit={submitForm}>
       <div className="content__form">
         <form className="form" id="form-login">
           <div className="form__header">
