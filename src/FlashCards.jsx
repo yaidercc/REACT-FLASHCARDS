@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Home, Login, SignUp } from "./components";
+import { Home, Login, Profile, SignUp } from "./components";
 import { UserProvider } from "./context/UserProvider.jsx";
 import { PrivateRoute } from "./guards/PrivateRoute.jsx";
 import { PublicRoute } from "./guards/PublicRoute.jsx";
@@ -20,12 +20,20 @@ const FlashCards = () => {
               </PrivateRoute>
             }
           />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            }
+          />
 
           <Route
             path="/login"
             element={
               <PublicRoute>
-                <Login />{" "}
+                <Login />
               </PublicRoute>
             }
           />
@@ -33,8 +41,7 @@ const FlashCards = () => {
             path="/singup"
             element={
               <PublicRoute>
-                {" "}
-                <SignUp />{" "}
+                <SignUp />
               </PublicRoute>
             }
           />

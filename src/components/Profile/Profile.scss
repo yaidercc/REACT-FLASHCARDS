@@ -1,0 +1,69 @@
+@import "../../styles/base/mixins";
+@import "../../styles/base/vars";
+@import "../../styles/base/colors";
+
+.profile {
+  padding-top: 2rem;
+  height: 100vh;
+  @include Flex();
+  &__form {
+    width: 100%;
+    .form__content {
+      @include Flex($direction: column);
+      gap: 2.5rem;
+    }
+  }
+  &__img {
+    border-radius: 5rem;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    img{
+      width:100%;
+      height: 100%;
+    }
+    .profile__input {
+      display: none;
+    }
+    &:hover > .profile__wallEdit {
+      opacity: 1;
+    }
+  }
+  .btn_submit {
+    margin-top: 1.5rem;
+  }
+  &__wallEdit {
+    @include Flex($direction: column);
+    gap: 1rem;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    font-weight: bold;
+    color: #fff;
+    opacity: 0;
+    transition: 0.3s opacity ease-in-out;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+  }
+  @include Desktop {
+    &__img {
+      width: 40%;
+    }
+    &__fields {
+      width: 60%;
+    }
+    .form__content {
+      @include Flex($direction: row);
+      gap: 2.5rem;
+    }
+    .btn_submit {
+      @include Flex($direction: row);
+      margin-top: 1.5rem;
+      width: 100%;
+      .btn {
+        width: 20rem;
+      }
+    }
+  }
+}

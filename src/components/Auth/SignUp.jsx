@@ -1,9 +1,13 @@
-
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm.js";
-export const SignUp = () => {
+import { signupSchema } from "../../helpers/formValidators";
+import { useAuth } from "../../hooks/useAuth.js";
+import Icono from "../../plugins/icon.jsx";
+import { Tooltip } from "react-tooltip";
+import { FieldError } from "../../utils/Form/FieldError.jsx";
 
-  const { name, surname, username, mail, password, repeatPassword, onInputChange } = useForm({
+export const SignUp = () => {
+  const { name, surname, username, mail, password, repeatPassword, onInputChange, handleSetErrors, getErrorMessage } = useForm({
     name: "",
     surname: "",
     username: "",
@@ -11,11 +15,42 @@ export const SignUp = () => {
     password: "",
     repeatPassword: "",
   });
+  const { Singup } = useAuth();
+  const navigate = useNavigate();
+
+  const onSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      await signupSchema.validate(
+        {
+          name,
+          surname,
+          username,
+          mail,
+          password,
+          repeatPassword,
+        },
+        { abortEarly: false }
+      );
+
+      await Singup({
+        name,
+        surname,
+        username,
+        mail,
+        password,
+      });
+      navigate("/login");
+    } catch (error) {
+      if (error.name === "ValidationError") handleSetErrors(error.inner);
+      else throw error;
+    }
+  };
 
   return (
     <div className="container__form">
       <div className="content__form">
-        <form action="#" className="form">
+        <form className="form" onSubmit={onSubmit}>
           <div className="form__header">
             <h2>Registrarte</h2>
           </div>
@@ -24,58 +59,95 @@ export const SignUp = () => {
             <div className="form__together">
               <div className="input">
                 <label>Ingresa tu nombre</label>
-                <input type="text" name="name" placeholder="nombre" onChange={onInputChange} value={name} required />
+                <input
+                  type="text"
+                  className={`${getErrorMessage("name") ? "input__error" : ""}`}
+                  name="name"
+                  placeholder="nombre"
+                  onChange={onInputChange}
+                  value={name}
+                />
+                <FieldError errorMessage={getErrorMessage("name")} />
               </div>
 
               <div className="input">
                 <label>Ingresa tu apellido</label>
-                <input type="text" name="surname" placeholder="apellido" onChange={onInputChange} value={surname} required />
+                <input
+                  type="text"
+                  className={`${getErrorMessage("surname") ? "input__error" : ""}`}
+                  name="surname"
+                  placeholder="apellido"
+                  onChange={onInputChange}
+                  value={surname}
+                />
+                <FieldError errorMessage={getErrorMessage("surname")} />
               </div>
             </div>
 
             <div className="input">
               <label>Ingresa tu usuario</label>
-              <input 
-                type="text" 
-                name="username" 
-                placeholder="usuario" 
-                onChange={onInputChange} 
+              <input
+                type="text"
+                className={`${getErrorMessage("username") ? "input__error" : ""}`}
+                name="username"
+                placeholder="usuario"
+                onChange={onInputChange}
                 value={username}
-                required />
+              />
+              <FieldError errorMessage={getErrorMessage("username")} />
             </div>
 
             <div className="input">
               <label>Ingresa tu correo</label>
-              <input 
-                type="email" 
-                name="mail" 
+              <input
+                type="email"
+                className={`${getErrorMessage("mail") ? "input__error" : ""}`}
+                name="mail"
                 placeholder="email"
-                onChange={onInputChange} 
+                onChange={onInputChange}
                 value={mail}
-                required />
+              />
+              <FieldError errorMessage={getErrorMessage("mail")} />
             </div>
 
             <div className="form__together">
               <div className="input">
-                <label>Ingresa tu clave</label>
-                <input 
-                  type="password" 
-                  name="password" 
-                  placeholder="clave" 
-                  onChange={onInputChange} 
+                <div className="passwordRequirements">
+                  <label>Ingresa tu clave</label>
+                  <button className="holi" data-tip="Hello world!" data-for="my-tooltip">
+                    <Icono name="info" />
+                  </button>
+                  <Tooltip anchorSelect=".holi" place="top">
+                    <p>La contraseña debe tener:</p>
+                    <hr />
+                    <p>Al menos una letra mayúscula.</p>
+                    <p>Al menos una letra minúscula.</p>
+                    <p>Al menos un número.</p>
+                    <p>Al menos un caracter especial.</p>
+                  </Tooltip>
+                </div>
+                <input
+                  type="password"
+                  className={`${getErrorMessage("password") ? "input__error" : ""}`}
+                  name="password"
+                  placeholder="clave"
+                  onChange={onInputChange}
                   value={password}
-                  required />
+                />
+                <FieldError errorMessage={getErrorMessage("password")} />
               </div>
 
               <div className="input">
                 <label>Repite tu clave</label>
-                <input 
-                  type="password" 
-                  name="repeatPassword" 
-                  placeholder="repita su clave" 
-                  onChange={onInputChange} 
+                <input
+                  type="password"
+                  className={`${getErrorMessage("name") ? "input__error" : ""}`}
+                  name="repeatPassword"
+                  placeholder="repita su clave"
+                  onChange={onInputChange}
                   value={repeatPassword}
-                  required />
+                />
+                <FieldError errorMessage={getErrorMessage("repeatPassword")} />
               </div>
             </div>
           </div>

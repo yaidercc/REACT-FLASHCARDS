@@ -17,7 +17,7 @@ export const FlashCardsList = () => {
   }, [flashcards]);
 
   const onClose = () => {
-    setModalInfo({ ...modalInfo, open: false });
+    setModalInfo({  title: "", typeForm: "", dataToEdit: {}, open: false });
   };
 
   const searchFlashcard = ({ target }) => {

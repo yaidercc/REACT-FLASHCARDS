@@ -1,20 +1,25 @@
 @import "../../styles/base/mixins";
 @import "../../styles/base/vars";
 @import "../../styles/base/colors";
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
 
 .menu {
   @include Flex($justify: space-between);
   padding: 2rem 0;
-  h1{
+  h1 {
     font-family: "Lobster", sans-serif;
     font-size: 3rem;
   }
-  .profile {
+  .menu__profile {
     position: relative;
     padding: 0 2rem;
     .btn__profile {
       @include Flex();
+    }
+    .profile_img{
+      width: 4.2rem;
+      height: 4.2rem;
+      border-radius: 50%;
     }
     &__options {
       background-color: #f9f8f8;
@@ -39,8 +44,8 @@
     }
   }
 
-  @include responsive(768px){
-    h1{
+  @include responsive(768px) {
+    h1 {
       font-size: 4.5rem;
     }
   }
@@ -53,7 +58,7 @@
 }
 
 .topics {
-  margin-top: 1rem!important;
+  margin-top: 1rem !important;
   cursor: pointer;
 
   &__settings {
@@ -129,11 +134,11 @@
     padding-bottom: 1rem;
     background-color: #fff;
     @include Flex($justify: space-between);
-  
+
     span {
       margin-right: 1rem;
     }
-  
+
     &:hover {
       box-shadow: 3px 3px 5px rgba($color: $blackColor, $alpha: 0.3);
       transition: 0.2s box-shadow ease-in-out;
@@ -143,7 +148,7 @@
   &__addTopic {
     @include Flex();
   }
-  
+
   .arrowIcon {
     transition: transform 0.3s ease-in-out;
     &.rotate__arrow {
@@ -168,7 +173,6 @@
   }
 }
 
-
 .container__flashcards {
   background-color: #fff;
   box-shadow: 3px 3px 5px rgba($color: $blackColor, $alpha: 0.1);
@@ -189,7 +193,7 @@
     height: 25rem;
     transform-style: preserve-3d;
     transition: transform 1s ease;
-    
+
     .face {
       position: absolute;
       top: 0;
@@ -200,27 +204,26 @@
       background-color: $blackColor;
       color: #fff;
     }
-  
+
     &.rotate {
       transform: rotateY(180deg);
     }
-  
+
     .anverse {
-      z-index: 2; 
+      z-index: 2;
       border-radius: 1.2rem;
     }
-  
+
     .overse {
       transform: rotateY(180deg);
     }
-  
+
     .flashcards__settings {
       display: flex;
       align-items: center;
       justify-content: center;
-      
     }
-  
+
     .inpt_question {
       display: flex;
       justify-content: center;
@@ -230,53 +233,53 @@
       padding: 0 2rem;
     }
   }
-  
-  @include responsive (768px) {
-    .flashcard  {
-        height: 35rem;
+
+  @include responsive(768px) {
+    .flashcard {
+      height: 35rem;
     }
   }
-  
+
   .flashcards__settings {
     position: relative;
-  
+
     a {
-        padding: 1rem;
-        color: #fff;
-        font-size: 2rem;
+      padding: 1rem;
+      color: #fff;
+      font-size: 2rem;
     }
-  
+
     button {
       padding: 1rem;
       color: #fff;
     }
 
     .btn__rotate {
-        font-size: 2.5rem;
+      font-size: 2.5rem;
     }
-  
+
     .settings {
-        position: absolute;
-        top: 0;
-        @include Flex()
+      position: absolute;
+      top: 0;
+      @include Flex();
     }
-  
+
     .btn__change {
-        left: 0;
-        background-color: $paletteColor;
-        border-radius: 1.2rem 0 0 0 ;
+      left: 0;
+      background-color: $paletteColor;
+      border-radius: 1.2rem 0 0 0;
     }
 
     .btn__delete {
-      border-radius: 0 1.2rem 0 0 ;
-        right: 0;
-        background-color: $deleteColor;
-        ion-icon {
-            color: #ffff;
-        }
+      border-radius: 0 1.2rem 0 0;
+      right: 0;
+      background-color: $deleteColor;
+      ion-icon {
+        color: #ffff;
+      }
     }
   }
-  
+
   .flashcards__header {
     @include Flex($direction: column);
     padding: 1.5rem;
@@ -301,7 +304,7 @@
   }
 }
 
-@include responsive (768px) {
+@include responsive(768px) {
   .content__flashcards {
     grid-template-columns: repeat(2, 1fr);
     padding: 1rem;

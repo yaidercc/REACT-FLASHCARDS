@@ -26,12 +26,19 @@
     &__footer{
         padding: 1rem 0;
     }
+    .passwordRequirements{
+        @include Flex($justify:flex-start);
+        gap: 1rem;
+        .icono{
+            width: 2rem!important;
+        }
+    }
 }
 
 @include Desktop{
     .form{
         &__together{
-            @include Flex();
+            @include Flex($align:flex-start);
             gap: 3rem;
         }
         &__body{

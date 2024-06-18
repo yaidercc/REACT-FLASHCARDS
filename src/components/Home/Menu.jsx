@@ -8,9 +8,9 @@ import { useAuth } from "../../hooks";
 export const Menu = () => {
   const [ isOpen, setIsOpen ] = useState(false);
   const { user } = useContext(UserContext);
-  const { name, surname } = user;
-  const { Logout } = useAuth()
-  const menuRef = useRef()
+  const { name, surname,profile_img } = user;
+  const { Logout } = useAuth();
+  const menuRef = useRef();
 
   const handleMenu = () => {
     setIsOpen(!isOpen);
@@ -36,19 +36,20 @@ export const Menu = () => {
   return (
     <div className="menu container">
       <h1>Flashcards</h1>
-      <div className="profile" ref={menuRef}>
+      <div className="menu__profile" ref={menuRef}>
         <button onClick={handleMenu} className="btn__profile">
-          <Avvvatars value={`${name} ${surname}`} size={45} shadow={true} />
+          <img src={profile_img} alt="profile img" className="profile_img" />
           <span className={isOpen ? "arrowIcon rotate__arrow" : "arrowIcon"}>
             <Icono name="arrowDown" />
           </span>
         </button>
-        <ul  className={isOpen ? "profile__options open" : "profile__options hide"}>
+        
+        <ul  className={`profile__options ${isOpen ? 'open' : 'hide' }`}>
           <li>
             <Link to="/profile">Perfil</Link>
           </li>
-          <li>
-            <button onClick={Logout}>Salir</button>
+          <li onClick={Logout}>
+            <button >Salir</button>
           </li>
         </ul>
       </div>
