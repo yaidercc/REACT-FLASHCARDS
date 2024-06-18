@@ -5,6 +5,7 @@ import { PrivateRoute } from "./guards/PrivateRoute.jsx";
 import { PublicRoute } from "./guards/PublicRoute.jsx";
 import { TopicsAndFlashcardsProvider } from "./context/Topics/TopicsAndFlashcardsProvider.jsx";
 import { PageNotFound } from "./utils/PageNotFound/PageNotFound.jsx";
+import { Menu } from "./components/Home/Menu.jsx";
 
 const FlashCards = () => {
   return (
@@ -15,8 +16,8 @@ const FlashCards = () => {
             path="/"
             element={
               <PrivateRoute>
-                {" "}
-                <Home />{" "}
+                <Menu />
+                <Home />
               </PrivateRoute>
             }
           />
@@ -24,6 +25,7 @@ const FlashCards = () => {
             path="/profile"
             element={
               <PrivateRoute>
+                <Menu />
                 <Profile />
               </PrivateRoute>
             }
@@ -45,12 +47,7 @@ const FlashCards = () => {
               </PublicRoute>
             }
           />
-          <Route
-            path="/*"
-            element={
-                <PageNotFound />
-            }
-          />
+          <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </TopicsAndFlashcardsProvider>
     </UserProvider>
