@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Home, Login, Profile, SignUp } from "./components";
+import { Home, Login, Profile, SignUp,ChangePassword,ForgotPassword } from "./components";
 import { UserProvider } from "./context/UserProvider.jsx";
 import { PrivateRoute } from "./guards/PrivateRoute.jsx";
 import { PublicRoute } from "./guards/PublicRoute.jsx";
@@ -40,7 +40,23 @@ const FlashCards = () => {
             }
           />
           <Route
-            path="/singup"
+            path="/changePassword/:token"
+            element={
+              <PublicRoute>
+                <ChangePassword />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/forgotPassword"
+            element={
+              <PublicRoute>
+                <ForgotPassword />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/signup"
             element={
               <PublicRoute>
                 <SignUp />

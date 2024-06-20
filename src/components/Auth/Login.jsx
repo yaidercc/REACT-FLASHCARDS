@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { useAuth, useForm } from "../../hooks";
 import { loginSchema } from "../../helpers/formValidators";
-import { alert } from "../../utils/alerts/alert";
 import "./Auth.scss";
+import { FieldError } from "../../utils/Form/FieldError";
 
 export const Login = () => {
-  const { username, password, onInputChange } = useForm({
+  const { username, password, onInputChange, getErrorMessage, handleSetErrors, setErrorFields, errorFields } = useForm({
     username: "",
     password: "",
   });
@@ -14,12 +14,22 @@ export const Login = () => {
   const submitForm = async (e) => {
     try {
       e.preventDefault();
-      await loginSchema.validate({ username, password });
+      if (!username.trim() || !password.trim()) {
+        const errors={}
+        if (!password.trim()) {
+          errors['password']= "Debes completar este campo."
+        }
+        if (!username.trim()) {
+          errors['username']= "Debes completar este campo."
+        }
+        setErrorFields({ ...errorFields, ...errors });
+        return;
+      }
+      await loginSchema.validate({ username, password }, { abortEarly: false });
       await Login({ username, password });
     } catch (error) {
-      const errorInfo = error.message;
-      console.log(error.path)
-      alert(errorInfo);
+      if (error.name === "ValidationError") handleSetErrors(error.inner);
+      else throw error;
     }
   };
 
@@ -35,10 +45,12 @@ export const Login = () => {
             <div className="input">
               <label>Ingresa tu usuario</label>
               <input type="text" name="username" placeholder="usuario" autoComplete="off" value={username} onChange={onInputChange} />
+              <FieldError errorMessage={getErrorMessage("username")} />
             </div>
             <div className="input">
               <label>Ingresa tu clave</label>
               <input type="password" name="password" placeholder="clave" autoComplete="off" value={password} onChange={onInputChange} />
+              <FieldError errorMessage={getErrorMessage("password")} />
             </div>
           </div>
           <div className="form__footer">
@@ -49,14 +61,14 @@ export const Login = () => {
             </div>
             <p className="text-url-container">
               <span>No tienes cuenta? </span>
-              <NavLink className="text-url" to="/singup">
+              <NavLink className="text-url" to="/signup">
                 Registrate
               </NavLink>
             </p>
             <p className="text-url-container">
-              <a href="#" className="text-url">
+              <NavLink className="text-url" to="/forgotPassword">
                 Recuperar contraseña
-              </a>
+              </NavLink>
             </p>
           </div>
         </form>

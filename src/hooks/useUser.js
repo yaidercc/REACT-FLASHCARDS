@@ -7,6 +7,13 @@ export const useUser = () => {
   const { Logout } = useAuth();
   const { setUser, user } = useContext(UserContext);
 
+  const handleAuthError = async (error) => {
+    const errorInfo = error?.response;
+    if (errorInfo?.status === 401) {
+      await Logout();
+    }
+  };
+
   const editUser = async (name, surname, username, mail) => {
     try {
       await axios.put(`/user/editUser/${user._id}`, {
@@ -16,10 +23,7 @@ export const useUser = () => {
         mail,
       });
     } catch (error) {
-      const errorInfo = error?.response;
-      if (errorInfo?.status === 401) {
-        await Logout();
-      }
+      handleAuthError(error)
     }
   };
 
@@ -35,10 +39,7 @@ export const useUser = () => {
       const { profile_img } = response.data;
       setUser({ ...user, profile_img });
     } catch (error) {
-      const errorInfo = error?.response;
-      if (errorInfo?.status === 401) {
-        await Logout();
-      }
+      handleAuthError(error)
     }
   };
   return { editUser, changeProfile };

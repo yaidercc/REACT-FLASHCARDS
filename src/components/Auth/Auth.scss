@@ -6,21 +6,22 @@
 .content__form {
   overflow: hidden;
 }
-.login {
+.login,.changePassword {
   &.container__form {
     height:90vh;
+    max-width: 90rem
   }
-
+  
   .content__form {
     @include Flex();
     height: auto;
     margin-bottom: 0;
   }
 }
+
 .form {
   @include Flex($direction: column, $justify: space-between);
   height: 100%;
-  // background-color: red;
   overflow: auto;
   &__together {
     @include Flex($direction: column);
@@ -47,7 +48,14 @@
     }
   }
 }
-
+.changePassword{
+  h2{
+    font-size: 2.5rem;
+  }
+}
+.react-tooltip{
+  z-index: 200;
+}
 @include Desktop {
   .form {
     &__together {
