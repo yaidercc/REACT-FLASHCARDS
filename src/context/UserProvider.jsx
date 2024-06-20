@@ -19,7 +19,7 @@ export const UserProvider = ({ children }) => {
       setIsLoading(false)
     } catch (error) {
       const errorInfo = error.response;
-      if (errorInfo.status === 401) {
+      if (errorInfo?.status === 401) {
         setIsAuthenticated(false);
         setUser({});
         setIsLoading(false)
