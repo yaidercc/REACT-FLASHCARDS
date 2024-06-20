@@ -1,1 +1,1 @@
-export const API_URL = 'http://localhost:4000/api';
+export const API_URL = 'https://flashcards-backend-1-0-0.onrender.com/api';
