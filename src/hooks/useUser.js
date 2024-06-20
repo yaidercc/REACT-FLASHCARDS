@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useAuth } from "./useAuth";
 import axios from "../helpers/fetchApi";
 import { UserContext } from "../context/UserContext";
+import { alertSuccess,alert } from "../utils/alerts/alert";
 
 export const useUser = () => {
   const { Logout } = useAuth();
@@ -25,6 +26,7 @@ export const useUser = () => {
         username,
         mail,
       });
+      alertSuccess("Usuario editado con exito.");
     } catch (error) {
       handleAuthError(error)
     }
@@ -41,6 +43,7 @@ export const useUser = () => {
       });
       const { profile_img } = response.data;
       setUser({ ...user, profile_img });
+      alertSuccess("Imagen cambiada con exito.")
     } catch (error) {
       handleAuthError(error)
     }

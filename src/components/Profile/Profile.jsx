@@ -5,7 +5,6 @@ import Icono from "../../plugins/icon.jsx";
 import "./Profile.scss";
 import { profileSchema } from "../../helpers/formValidators.js";
 import { useUser } from "../../hooks/useUser.js";
-import { alertSuccess, alert } from "../../utils/alerts/alert";
 import { FieldError } from "../../utils/Form/FieldError.jsx";
 
 export const Profile = () => {
@@ -21,7 +20,6 @@ export const Profile = () => {
       const fields = { name: nameField, surname: surnameField, username: usernameField, mail: mailField };
       await profileSchema.validate(fields, { abortEarly: false });
       await editUser(nameField, surnameField, usernameField, mailField);
-      alertSuccess("Usuario editado con exito.");
       setErrorFields({});
     } catch (error) {
       if (error.name === "ValidationError") handleSetErrors(error.inner);
@@ -38,7 +36,6 @@ export const Profile = () => {
         throw new Error("El formato del archivo no es soportado. (png,jpg,jpeg).");
       }
       await changeProfile(e.target.files[0])
-      alertSuccess("Imagen cambiada con exito.")
     } catch (error) {
       alert(error.message)
     }
