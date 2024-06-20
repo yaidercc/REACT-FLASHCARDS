@@ -1,5 +1,4 @@
 @import "../../styles/base/mixins";
-@import "../../styles/base/vars";
 @import "../../styles/base/colors";
 @import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
 
@@ -30,7 +29,7 @@
       text-align: center;
       left: 0;
       transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-      border-radius: $radius;
+      border-radius: 1.2rem;
 
       li {
         padding: 0.5rem 0;
@@ -356,13 +355,13 @@
   }
 }
 
-@media (min-width: 768px) {
+@include Desktop{
   .definition__flashcard {
     display: flex;
     flex-direction: row;
-
+    gap: 1rem;
     img {
-      height: 40rem;
+      height: 30rem;
     }
   }
 }

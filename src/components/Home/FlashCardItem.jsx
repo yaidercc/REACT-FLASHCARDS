@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useFlashCards } from "../../hooks/useFlashCards.js";
+import { useFlashCards } from "../../hooks";
 import Icono from "../../plugins/icon.jsx";
 import { alert, alertQuestion, alertSuccess } from "../../utils/alerts/alert.js";
 
-export const FlashCardItem = ({ _id, question, answer, setModalInfo }) => {
+export const FlashCardItem = ({ _id, question, answer, setModalInfo,deleteFlashcard }) => {
   const [isFlipped, setIsFlipped] = useState(false);
-  const { deleteFlashcard } = useFlashCards();
+  
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);

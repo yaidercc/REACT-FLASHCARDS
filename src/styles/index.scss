@@ -152,7 +152,6 @@ body {
   align-items: center;
 
   h1 {
-    // font-family: $logoFont;
     font-size: calc(1.3em + 1.3vw);
   }
 
@@ -284,72 +283,6 @@ body {
   }
 }
 
-/* **** definition flashcards **** */
-
-/* **** footer **** */
-.site-footer {
-  background-color: $blackColor;
-  overflow: hidden;
-  margin-top: 3rem;
-  padding-bottom: 1rem;
-}
-
-.content_footer {
-  margin-top: 3rem;
-  text-align: center;
-  margin-bottom: 0.5rem;
-
-  color: #fff;
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 3rem 0 0rem 0;
-  margin-top: 2rem;
-
-  li {
-    margin-top: 2rem;
-
-    a {
-      color: #fff;
-      font-weight: 400;
-      transition: 0.4s all ease-in-out;
-
-      &:hover {
-        color: $principalColor;
-      }
-    }
-  }
-
-  &:last-child {
-    margin: 0;
-  }
-}
-
-@media (min-width: 768px) {
-  .content_footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem 0;
-  }
-
-  .info {
-    flex-direction: row;
-
-    padding: 0;
-
-    li {
-      height: initial;
-      margin: 0;
-      margin-right: 2rem;
-    }
-  }
-}
-
 /* **** modal **** */
 .overlay {
   @extend %overlay;
@@ -392,6 +325,15 @@ body {
 }
 
 .form {
+  &__together {
+    @include Flex($direction: column);
+  }
+  @include Desktop {
+    &__together {
+      @include Flex($align: flex-start);
+      gap: 3rem;
+    }
+  }
   .input_modal {
     textarea {
       height: 10rem;
@@ -451,69 +393,10 @@ body {
   }
 }
 
-.form {
-  &__together {
-    @include Flex($direction: column);
-  }
-  @include Desktop {
-    &__together {
-      @include Flex($align: flex-start);
-      gap: 3rem;
-    }
-  }
-}
-
 .text-url-container {
   margin-top: 2rem;
   text-align: center;
   .text-url {
     color: $principalColor;
   }
-}
-.validacion {
-  display: flex;
-  align-items: center;
-  margin-top: 1rem;
-  font-size: 1.3rem;
-  color: $principalColor;
-  font-weight: bold;
-  span {
-    margin-left: 0.5rem;
-  }
-  ion-icon {
-    font-size: 1.6rem;
-  }
-}
-
-/* alert styles */
-
-.alert {
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 4px;
-  position: absolute;
-  bottom: 0px;
-  right: 21px;
-  background-color: white;
-}
-
-.alert-red {
-  color: white;
-  background-color: #da4453;
-}
-.alert-green {
-  color: white;
-  background-color: #37bc9b;
-}
-.alert-blue {
-  color: white;
-  background-color: #4a89dc;
-}
-.alert-yellow {
-  color: white;
-  background-color: #f6bb42;
-}
-.alert-orange {
-  color: white;
-  background-color: #e9573f;
 }

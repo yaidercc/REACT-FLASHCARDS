@@ -4,10 +4,14 @@ import { UserContext } from "../context/UserContext";
 import { alert, alertSuccess } from "../utils/alerts/alert";
 import { useNavigate } from "react-router-dom";
 import { TopicsAndFlashcards } from "../context/Topics/TopicsAndFlashcardsContext";
+
+
 export const useAuth = () => {
   const { setUser, setIsAuthenticated, setIsLoading } = useContext(UserContext);
   const { setFlashcards, setTopics, setCurrentTopic } = useContext(TopicsAndFlashcards);
   const navigate = useNavigate();
+
+
   const Login = async ({ username, password }) => {
     try {
       setIsLoading(true);
@@ -17,16 +21,17 @@ export const useAuth = () => {
       });
       const { user } = response.data;
       setIsAuthenticated(true);
-      setIsLoading(false);
       setUser(user);
     } catch (error) {
-      setIsLoading(false);
-      const errorInfo = error.response.data?.msg || error?.message || error.response.data?.errors?.msg;
+      const errorInfo = error.response.data?.msg ||  error.response.data?.errors?.msg || error?.message;
       alert(errorInfo);
+    } finally{
+      setIsLoading(false);
+
     }
   };
 
-  const Singup = async ({ name, surname, username, mail, password, repeatPassword }) => {
+  const Signup = async ({ name, surname, username, mail, password, repeatPassword }) => {
     try {
       setIsLoading(true);
       await axios.post("/auth/singup", {
@@ -37,13 +42,63 @@ export const useAuth = () => {
         password,
         repeatPassword,
       });
-      setIsLoading(false);
       alertSuccess("Registro exitoso");
       navigate("/login");
     } catch (error) {
-      setIsLoading(false);
-      const errorInfo = error.response.data?.msg || error?.message || error.response.data?.errors?.msg;
+      const errorInfo = error.response.data?.msg ||  error.response.data?.errors?.msg || error?.message;
       alert(errorInfo);
+    } finally{
+      setIsLoading(false);
+    }
+  };
+
+  const ForgotPassword = async (mail) => {
+    try {
+      setIsLoading(true);
+      const response = await axios.post("/auth/sendEmailToResetPassword", { mail });
+      const { msg } = response.data;
+      alertSuccess(msg);
+      navigate("/login");
+    } catch (error) {
+      const errorInfo = error.response.data?.msg ||  error.response.data?.errors?.msg || error?.message;
+      alert(errorInfo);
+    } finally{
+      setIsLoading(false);
+    }
+  };
+  const validateToken = async (token) => {
+    try {
+      await axios.get("/auth/validateToken", {
+        headers: {
+          "x-token": token,
+        },
+      });
+    } catch (error) {
+      navigate("/login");
+      const errorInfo = error.response.data?.msg ||  error.response.data?.errors?.msg || error?.message;
+      alert(errorInfo);
+    }
+  };
+
+  const changePassword = async (password,token) => {
+    try {
+      setIsLoading(true);
+      const response = await axios.post("/auth/resetPassword", {
+        password,
+        
+      },{
+        headers: {
+          "x-token": token,
+        },
+      });
+      const { msg } = response.data
+      alertSuccess(msg);
+      navigate("/login");
+    } catch (error) {
+      const errorInfo = error.response.data?.msg ||  error.response.data?.errors?.msg || error?.message;
+      alert(errorInfo);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -53,13 +108,16 @@ export const useAuth = () => {
     setIsAuthenticated(false);
     setFlashcards([]);
     setTopics([]);
-    setCurrentTopic(null);
+    setCurrentTopic(null)
     localStorage.removeItem("topic");
   };
 
   return {
     Login,
     Logout,
-    Singup,
+    Signup,
+    ForgotPassword,
+    validateToken,
+    changePassword
   };
 };

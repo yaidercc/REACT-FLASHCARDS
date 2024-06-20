@@ -7,10 +7,10 @@ import { FlashCardListHeader } from "./FlashCardListHeader";
 import { NotFound } from "../../utils/NotFound/NotFound";
 
 export const FlashCardsList = () => {
-  useFlashCards();
   const [modalInfo, setModalInfo] = useState({ title: "", typeForm: "", open: false, dataToEdit: {} });
   const { flashcards, currentTopic } = useContext(TopicsAndFlashcards);
   const [ FlashCardsItems, setFlashCardsItems ] = useState(flashcards);
+  const { deleteFlashcard } = useFlashCards();
 
   useEffect(() => {
     setFlashCardsItems(flashcards);
@@ -60,7 +60,7 @@ export const FlashCardsList = () => {
             ?
               <div className="content__flashcards scroll">
                 {FlashCardsItems.map((flashcard) => {
-                  return <FlashCardItem key={flashcard._id} {...flashcard} setModalInfo={setModalInfo} />;
+                  return <FlashCardItem key={flashcard._id} {...flashcard} setModalInfo={setModalInfo} deleteFlashcard={deleteFlashcard}  />;
                 })}
               </div> 
             :
