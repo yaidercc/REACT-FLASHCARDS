@@ -73,7 +73,6 @@ export const useTopics = () => {
   const selectTopic = (id) => {
     localStorage.setItem("topic", id);
     setCurrentTopic(id);
-    console.log("da");
   };
 
   return { getTopics, selectTopic, createTopic, editTopic, deleteTopic };

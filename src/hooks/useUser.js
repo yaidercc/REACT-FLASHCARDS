@@ -11,7 +11,10 @@ export const useUser = () => {
     const errorInfo = error?.response;
     if (errorInfo?.status === 401) {
       await Logout();
+      return
     }
+    const errorMsg = error.response.data?.msg ||  error.response.data?.errors?.msg || error?.message;
+    alert(errorMsg);
   };
 
   const editUser = async (name, surname, username, mail) => {
