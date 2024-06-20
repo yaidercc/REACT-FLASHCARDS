@@ -62,7 +62,6 @@ export const useTopics = () => {
       setTopics(topics.filter((topic) => topic._id !== id));
       if (id === currentTopic) {
         setCurrentTopic("");
-        console.log("da");
         localStorage.removeItem("topic");
       }
     } catch (error) {
