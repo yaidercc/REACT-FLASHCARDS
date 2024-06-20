@@ -10,7 +10,7 @@ import { FieldError } from "../../utils/Form/FieldError.jsx";
 export const Profile = () => {
   const { user } = useContext(UserContext);
   const { name, surname, username, mail, profile_img } = user;
-  const { onInputChange, formState, getErrorMessage, handleSetErrors, setErrorFields } = useForm({ name, surname, username, mail });
+  const { onInputChange, formState, getErrorMessage, handleSetErrors, setErrorFields,resetForm } = useForm({ name, surname, username, mail });
   const { name: nameField, surname: surnameField, username: usernameField, mail: mailField } = formState;
   const { editUser, changeProfile } = useUser();
 
@@ -19,7 +19,10 @@ export const Profile = () => {
       e.preventDefault();
       const fields = { name: nameField, surname: surnameField, username: usernameField, mail: mailField };
       await profileSchema.validate(fields, { abortEarly: false });
-      await editUser(nameField, surnameField, usernameField, mailField);
+      const response = await editUser(nameField, surnameField, usernameField, mailField);
+      if(!response){
+        resetForm()
+      }
       setErrorFields({});
     } catch (error) {
       if (error.name === "ValidationError") handleSetErrors(error.inner);

@@ -16,6 +16,7 @@ export const useUser = () => {
     }
     const errorMsg = error.response.data?.msg || error.response.data?.errors?.msg || error?.message;
     alert(errorMsg);
+    return false
   };
 
   const editUser = async (name, surname, username, mail) => {
@@ -28,9 +29,10 @@ export const useUser = () => {
       });
       setUser({ ...user, name, surname, username, mail });
       alertSuccess("Usuario editado con exito.");
+      return true
     } catch (error) {
       setUser(user)
-      handleAuthError(error);
+      return handleAuthError(error);
     }
   };
 
