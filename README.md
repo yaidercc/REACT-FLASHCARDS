@@ -17,10 +17,10 @@ Toda la informacion acerca del backend de este proyecto se encuentra en el sigui
 
 ## Tecnologías utilizadas
 - React.js
-- yup
-- sweetalert2
-- axios
-- react-router-dom
-- react-tooltip
-- mui
-- sass
+- Yup
+- Sweetalert2
+- Axios
+- React-router-dom
+- React-tooltip
+- Mui
+- Sass
