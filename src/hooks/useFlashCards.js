@@ -2,7 +2,7 @@ import { useContext, useEffect, useCallback } from "react";
 import { TopicsAndFlashcards } from "../context/Topics/TopicsAndFlashcardsContext";
 import axios from "../helpers/fetchApi";
 import { useAuth } from "./useAuth";
-
+import { alert } from "../utils/alerts/alert";
 export const useFlashCards = () => {
   const { flashcards, setFlashcards, currentTopic } = useContext(TopicsAndFlashcards);
   const { Logout } = useAuth();
@@ -18,6 +18,9 @@ export const useFlashCards = () => {
     if (errorInfo?.status === 401) {
       await Logout();
     }
+    const errorMsg = error.response.data?.msg || error.response.data?.errors?.msg || error?.message;
+    alert(errorMsg);
+    return false
   };
 
   const getFlashCards = async () => {

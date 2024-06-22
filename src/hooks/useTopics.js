@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { useAuth } from "./useAuth";
 import { TopicsAndFlashcards } from "../context/Topics/TopicsAndFlashcardsContext";
 import axios from "../helpers/fetchApi";
-
+import {  alert, alertSuccess } from "../utils/alerts/alert";
 export const useTopics = () => {
   const { Logout } = useAuth();
   const { topics, setTopics, currentTopic, setCurrentTopic } = useContext(TopicsAndFlashcards);
@@ -20,6 +20,9 @@ export const useTopics = () => {
     if (errorInfo?.status === 401) {
       await Logout();
     }
+    const errorMsg = error.response.data?.msg || error.response.data?.errors?.msg || error?.message;
+    alert(errorMsg);
+    return false
   };
 
   const getTopics = async () => {
@@ -37,6 +40,7 @@ export const useTopics = () => {
       const response = await axios.post("/topic/createTopic", { name, description });
       const { topic } = response.data;
       setTopics([...topics, topic]);
+      alertSuccess("Temario creado con exito")
     } catch (error) {
       handleAuthError(error);
     }
@@ -51,6 +55,7 @@ export const useTopics = () => {
         updatedTopics[index] = { ...updatedTopics[index], name, description };
         setTopics(updatedTopics);
       }
+      alertSuccess("Temario editado con exito")
     } catch (error) {
       handleAuthError(error);
     }
@@ -64,6 +69,7 @@ export const useTopics = () => {
         setCurrentTopic("");
         localStorage.removeItem("topic");
       }
+      alertSuccess("Temario eliminado con exito")
     } catch (error) {
       handleAuthError(error);
     }
