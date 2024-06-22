@@ -98,7 +98,7 @@ export const TopicsList = () => {
             </li>
             <li className="topics__container scroll">
               <ul className="topics__list">
-                {topicsItems.map((topic, i) => {
+                {topicsItems.map((topic) => {
                   return (
                     <li onClick={() => selectTopic(topic._id)}  className={`topic__item ${currentTopic === topic._id ? "selected" : ""}`} key={topic.name}>
                       <label className="topic__name">

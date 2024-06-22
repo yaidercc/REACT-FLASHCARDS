@@ -1,4 +1,4 @@
-import { useContext, useEffect, useCallback } from "react";
+import { useContext, useEffect } from "react";
 import { TopicsAndFlashcards } from "../context/Topics/TopicsAndFlashcardsContext";
 import axios from "../helpers/fetchApi";
 import { useAuth } from "./useAuth";

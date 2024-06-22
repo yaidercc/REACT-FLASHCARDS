@@ -3,7 +3,7 @@ import { useTopics } from "../../../hooks/useTopics";
 import { alert } from "../../alerts/alert.js";
 
 export const FormTopics = ({ _id = "", name = "", description = "", onClose }) => {
-  const { formState, onInputChange, resetForm } = useForm({ name, description });
+  const { formState, onInputChange } = useForm({ name, description });
   const { name: nameText, description: descriptionText } = formState;
   const { createTopic, editTopic } = useTopics();
 
