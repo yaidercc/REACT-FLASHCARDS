@@ -24,7 +24,7 @@ export const useTopics = () => {
 
   const getTopics = async () => {
     try {
-      const response = await axios.get("/topic");
+      const response = await axios.get("/topic/getTopics");
       const { Topics } = response.data;
       setTopics(Topics);
     } catch (error) {
