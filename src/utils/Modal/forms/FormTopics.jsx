@@ -1,6 +1,6 @@
 import { useForm } from "../../../hooks/useForm";
 import { useTopics } from "../../../hooks/useTopics";
-import { alert, alertSuccess } from "../../alerts/alert.js";
+import { alert } from "../../alerts/alert.js";
 
 export const FormTopics = ({ _id = "", name = "", description = "", onClose }) => {
   const { formState, onInputChange, resetForm } = useForm({ name, description });
@@ -15,20 +15,13 @@ export const FormTopics = ({ _id = "", name = "", description = "", onClose }) =
         return;
       }
 
-      let title = "";
-
-      if (_id) {
-        await editTopic(_id, nameText, descriptionText);
-        title = "Temario editado con exito.";
-      } else {
+      if (_id) await editTopic(_id, nameText, descriptionText);
+      else {
         await createTopic(nameText, descriptionText);
-        resetForm();
-        title = "Temario creado con exito.";
       }
-      onClose()
-      alertSuccess(title);
+      onClose();
     } catch (error) {
-      alert("Hubo un error al realizar esta accion, intentalo mas tarde","Oops...")
+      alert("Hubo un error al realizar esta accion, intentalo mas tarde", "Oops...");
     }
   };
 
@@ -40,7 +33,13 @@ export const FormTopics = ({ _id = "", name = "", description = "", onClose }) =
       </div>
       <div className="input input_modal">
         <label>ingrese la descripcion (Opcional)</label>
-        <textarea name="description" type="text" value={descriptionText} placeholder="EJ: temario para estudiar las tablas de multiplicar" onChange={onInputChange}></textarea>
+        <textarea
+          name="description"
+          type="text"
+          value={descriptionText}
+          placeholder="EJ: temario para estudiar las tablas de multiplicar"
+          onChange={onInputChange}
+        ></textarea>
       </div>
       <div className="btn_submit">
         <ion-icon name="save"></ion-icon>

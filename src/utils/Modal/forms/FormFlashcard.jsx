@@ -19,15 +19,10 @@ export const FormFlashcard = ({ _id = "", question = "", answer = "" }) => {
 
       if (_id.trim()) {
         await editFlashcard(_id, questionText, answerText);
-        title = "Flashcard editada con exito"
       } else {
         await createFlashCards(questionText,answerText);
-        title = "Flashcard creada con exito"
-        resetForm();
       }
-
-      alertSuccess(title);
-
+      resetForm();
     } catch (error) {
       alert("Hubo un error al realizar esta accion, intentalo mas tarde","Oops...",)
     }

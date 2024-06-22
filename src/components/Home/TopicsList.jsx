@@ -67,6 +67,7 @@ export const TopicsList = () => {
   };
 
   const searchTopic = ({ target }) => {
+    alert("kjbkjhb")
     const { value } = target;
     const topicsFind = topics.filter((topic) => {
       if (new RegExp(value, "gi").test(topic.name)) {
@@ -99,9 +100,8 @@ export const TopicsList = () => {
               <ul className="topics__list">
                 {topicsItems.map((topic, i) => {
                   return (
-                    <li className={`topic__item ${currentTopic === topic._id ? "selected" : ""}`} key={topic.name}>
-                      <label onClick={() => selectTopic(topic._id)} className="topic__name" htmlFor={`topic__id-${i}`}>
-                        <input type="radio" name="topic__item" id={`topic__id-${i}`} checked={currentTopic === topic._id} />
+                    <li onClick={() => selectTopic(topic._id)}  className={`topic__item ${currentTopic === topic._id ? "selected" : ""}`} key={topic.name}>
+                      <label className="topic__name">
                         <span>{topic.name}</span>
                       </label>
                       <div className="topics__settings">
