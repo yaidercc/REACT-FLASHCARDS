@@ -15,7 +15,6 @@ export const FormFlashcard = ({ _id = "", question = "", answer = "" }) => {
         return;
       }
 
-
       if (_id.trim()) {
         await editFlashcard(_id, questionText, answerText);
       } else {
