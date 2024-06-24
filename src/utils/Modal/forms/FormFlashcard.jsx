@@ -2,7 +2,7 @@ import { useForm } from "../../../hooks/useForm";
 import { useFlashCards } from "../../../hooks";
 import { alert, alertSuccess } from "../../alerts/alert.js";
 
-export const FormFlashcard = ({ _id = "", question = "", answer = "" }) => {
+export const FormFlashcard = ({ _id = "", question = "", answer = "", onClose }) => {
   const { formState, onInputChange, resetForm } = useForm({ answer, question });
   const { editFlashcard, createFlashCards } = useFlashCards();
   const { question: questionText, answer: answerText } = formState;
@@ -20,8 +20,10 @@ export const FormFlashcard = ({ _id = "", question = "", answer = "" }) => {
       } else {
         await createFlashCards(questionText,answerText);
       }
+      onClose()
       resetForm();
     } catch (error) {
+      console.log(error)
       alert("Hubo un error al realizar esta accion, intentalo mas tarde","Oops...",)
     }
   };
